@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@theme {
+    --color-primary: #7C5BF3;
+    --color-hover: #9576F5;
+}
+
+.principal-button {
+    @apply flex items-center text-sm text-white bg-[#7C5BF3] hover:bg-[#9576F5] rounded-lg p-2;
+  }

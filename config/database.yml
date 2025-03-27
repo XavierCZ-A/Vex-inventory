@@ -22,8 +22,11 @@ default: &default
 
 development:
   <<: *default
-  database: stock_manangement_development
-
+  database: stock_manager_development
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
@@ -56,7 +59,11 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: stock_manangement_test
+  database: stock_manager_test
+  host: <%= ENV['DATABASE_TEST_HOST'] %>
+  username: <%= ENV['DATABASE_TEST_USERNAME'] %>
+  password: <%= ENV['DATABASE_TEST_PASSWORD'] %>
+  port: <%= ENV['DATABASE_TEST_PORT'] %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

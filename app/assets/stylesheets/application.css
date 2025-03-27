@@ -8,3 +8,79 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.pagy {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.pagy a {
+    font-weight: bold;
+    border: 2px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    color: black;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.pagy a:hover {
+    background-color: #7C5BF3;
+    color: white;
+    border-color: #7C5BF3;
+}
+
+.pagy a:focus {
+    outline: none;
+    box-shadow: 0 0 5px 2px rgba(17, 121, 249, 0.6);
+}
+
+.pagy a[aria-label="Previous"][aria-disabled="true"],
+.pagy a[aria-label="Next"][aria-disabled="true"] {
+    background-color: #f0f0f0;
+    color: #aaa;
+    border-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.pagy a[aria-label="Previous"]:not([aria-disabled="true"]),
+.pagy a[aria-label="Next"]:not([aria-disabled="true"]) {
+    background-color: white;
+    border-radius: 25px;
+    color: black;
+    border-color: lightgray;
+}
+
+.pagy .current {
+    background-color: #7C5BF3;
+    color: white;
+    border-color: #7C5BF3;
+    font-weight: bold;
+}
+
+.pagy .current:hover {
+    background-color: #9576F5;
+    border-color: #9576F5;
+}

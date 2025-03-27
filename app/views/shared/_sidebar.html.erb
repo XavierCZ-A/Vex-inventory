@@ -1,0 +1,26 @@
+<aside class="sidebar">
+  <nav class="w-64 h-full border border-gray-200 shadow-lg flex flex-col justify-between">
+    <div>
+      <%= link_to "#", class: "flex items-center space-x-3 my-5 p-2 rounded-lg hover:bg-gray-100" do %>
+        <div>
+          <%= tabler_icon("box", size: 35) %>
+        </div>
+        <div class="flex flex-col text-start leading-tight overflow-hidden">
+          <h2 className="text-xl font-semibold animate-fade-in">
+            <span className="text-purple-500">Prod</span>Manager
+          </h2>
+          <span class="overflow-ellipsis text-xs">Enterprise</span>
+        </div>
+        <div class="ml-auto mr-5">
+          <%= tabler_icon("caret-up-down", size: 15) %>
+        </div>
+      <% end %>
+      <ul class="space-y-10 p-3">
+        <li>
+          <%= link_to products_path, class: "flex items-center space-x-3 text-sm rounded-sm p-2 #{current_page?(products_path) ? 'font-semibold border-r-5 border-[#7C5BF3]' : 'text-gray-400 hover:bg-gray-200 hover:rounded-lg'}" do %>
+            <%= tabler_icon('cube', size: '20', class: "#{current_page?(products_path) ? 'text-[#7C5BF3]' : 'text-gray-400'}") %>
+            <span> Products </span>
+          <% end %>
+        </li>
+  </nav>
+</aside>
