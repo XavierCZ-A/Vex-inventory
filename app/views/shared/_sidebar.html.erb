@@ -22,5 +22,11 @@
             <span> Products </span>
           <% end %>
         </li>
+        <li>
+          <%= link_to warehouses_path, class: "flex items-center space-x-3 text-sm rounded-sm p-2 #{current_page?(warehouses_path) ? 'font-semibold border-r-5 border-[#7C5BF3]' : 'text-gray-400 hover:bg-gray-200 hover:rounded-lg'}" do %>
+            <%= tabler_icon('building-warehouse', size: '20', class: "#{current_page?(warehouses_path) ? 'text-[#7C5BF3]' : 'text-gray-400'}") %>
+            <span> Warehouses </span>
+          <% end %>
+        </li>
   </nav>
 </aside>

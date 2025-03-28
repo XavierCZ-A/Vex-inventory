@@ -3,7 +3,7 @@ class WarehousesController < ApplicationController
 
   # GET /warehouses or /warehouses.json
   def index
-    @warehouses = Warehouse.includes(:stocks)
+    @warehouses = Warehouse.all
     # Utilizar el método en el modelo para calcular la ocupación de cada warehouse
     @ocupacity_by_warehouse = @warehouses.each_with_object({}) do |warehouse, hash|
       hash[warehouse.id] = warehouse.ocupacity_percentage
