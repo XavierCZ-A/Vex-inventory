@@ -1,0 +1,49 @@
+<div id="<%= dom_id warehouse %>" class="w-95 rounded-xl bg-white shadow-lg p-6 space-y-6 overscroll-none">
+  <div class="space-y-1">
+    <h2 class="text-2xl font-bold text-gray-900"><%= warehouse.name %></h2>
+    <p class="text-gray-500"><%= warehouse.address %></p>
+  </div>
+
+  <div class="space-y-4">
+    <div class="flex justify-between items-center">
+      <span class="text-gray-500">Capacidad:</span>
+      <span class="font-medium text-gray-900"><%= warehouse.capacity%></span>
+    </div>
+
+    <div class="flex justify-between items-center">
+      <span class="text-gray-500">Stock actual:</span>
+      <% if @stock_by_warehouse.nil? %>
+        <span class="font-medium text-gray-900">0 unidades</span>
+      <% else %>
+        <span class="font-medium text-gray-900"><%= @stock_by_warehouse[warehouse.id] %> unidades</span>
+      <% end %>
+    </div>
+    <div class="space-y-2">
+      <% if @ocupacity_by_warehouse && @ocupacity_by_warehouse[warehouse.id] %>
+        <div class="flex justify-between items-center">
+          <span class="text-gray-500">Ocupación:</span>
+          <span class="font-medium text-gray-900"><%= @ocupacity_by_warehouse[warehouse.id] %> %</span>
+        </div>
+        <div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+          <div
+            class="h-full bg-[#7C5BF3] rounded-full transition-all duration-300 ease-in-out"
+            style="width: <%= @ocupacity_by_warehouse[warehouse.id] %>%;"
+          ></div>
+        </div>
+      <% else %>
+        <p>Ocupación: 0%</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="flex gap-4">
+    <%= link_to edit_warehouse_path(warehouse), class: "flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors" do %>
+      <%= tabler_icon('edit', size: '15') %>
+      Edit
+    <% end %>
+    <%= link_to stock_warehouse_path(warehouse), class: "flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors" do %>
+      <%= tabler_icon('info-octagon', size: '15') %>
+      More info
+    <% end %>
+  </div>
+</div>

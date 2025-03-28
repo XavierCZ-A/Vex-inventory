@@ -6,17 +6,9 @@ class CategoriesController < ApplicationController
     @categories = Category.all
   end
 
-  # GET /categories/1 or /categories/1.json
-  def show
-  end
-
   # GET /categories/new
   def new
     @category = Category.new
-  end
-
-  # GET /categories/1/edit
-  def edit
   end
 
   # POST /categories or /categories.json
@@ -26,15 +18,6 @@ class CategoriesController < ApplicationController
       redirect_to @category, notice: "Category was successfully created."
     else
       render :new, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /categories/1 or /categories/1.json
-  def update
-    if @category.update(category_params)
-      redirect_to @category, notice: "Category was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
     end
   end
 

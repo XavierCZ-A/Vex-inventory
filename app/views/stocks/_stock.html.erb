@@ -1,0 +1,23 @@
+<div id="<%= dom_id stock %>" class="w-full sm:w-auto my-5 space-y-5">
+  <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+    <div class="overflow-x-auto">
+      <tr class="border-t border-gray-200">
+        <td class="py-3 px-6">
+          <div class="flex items-center">
+            <%= tabler_icon("package", size: "20", class: "text-[#7C5BF3] mr-2") %>
+            <%= stock.product.name %>
+          </div>
+        </td>
+        <td class="py-3 px-6"><%= stock.product.category.name %></td>
+        <td class="py-3 px-6"><%= number_to_currency(stock.product.price) %></td>
+        <td class="py-3 px-6">
+          <div class="flex items-center">
+                    <span class="font-medium">
+                      <%= stock.quantity %>
+                    </span>
+          </div>
+        </td>
+      </tr>
+    </div>
+  </div>
+</div>

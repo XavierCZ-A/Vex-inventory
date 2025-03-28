@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @pagy, @products = pagy(Product.all)
+    @pagy, @products = pagy(Product.includes(:category))
   end
 
   # GET /products/1 or /products/1.json

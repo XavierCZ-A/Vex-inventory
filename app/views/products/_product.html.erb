@@ -14,9 +14,10 @@
     </td>
     <td class="px-6 py-4 whitespace-nowrap">
       <p class="text-sm font-medium text-gray-900">
-        <%= number_to_currency(product.price) %>
+        <%= product.stocks.sum(:quantity) || "Sin stock" %>
       </p>
     </td>
+    
     <td class="px-6 py-4 whitespace-nowrap">
       <span class="<%= category_color(product.category.name) %> px-2 py-1 rounded-full text-xs">
         <%= product.category.name %>

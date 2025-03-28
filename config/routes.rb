@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :categories
+  resources :stocks
+  resources :warehouses do
+    get "stock", on: :member, to: "stocks#index"
+  end
+  resources :categories, only: [ :index, :new, :create ]
   resources :products
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
