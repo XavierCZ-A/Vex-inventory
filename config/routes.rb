@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :stocks
+  resources :suppliers
+  resources :stocks, except: :show
   resources :warehouses do
     get "stock", on: :member, to: "stocks#index"
   end

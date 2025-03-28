@@ -11,4 +11,7 @@ class Product < ApplicationRecord
   }
   validates :price, presence: true, numericality: true
   validates :category_id, presence: true
+
+  scope :total_products_price, -> { sum(:price) }
+  scope :order_by_date, -> { order(created_at: :desc) }
 end

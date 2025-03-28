@@ -11,10 +11,6 @@ class StocksController < ApplicationController
     end
   end
 
-  # GET /stocks/1 or /stocks/1.json
-  def show
-  end
-
   # GET /stocks/new
   def new
     @stock = Stock.new

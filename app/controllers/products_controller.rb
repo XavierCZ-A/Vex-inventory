@@ -4,6 +4,8 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @pagy, @products = pagy(Product.includes(:category))
+    @total_products_price = Product.total_products_price
+    @total_stock = Stock.total_stock
   end
 
   # GET /products/1 or /products/1.json

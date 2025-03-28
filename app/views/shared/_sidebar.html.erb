@@ -28,5 +28,11 @@
             <span> Warehouses </span>
           <% end %>
         </li>
+        <li>
+          <%= link_to suppliers_path, class: "flex items-center space-x-3 text-sm rounded-sm p-2 #{current_page?(suppliers_path) ? 'font-semibold border-r-5 border-[#7C5BF3]' : 'text-gray-400 hover:bg-gray-200 hover:rounded-lg'}" do %>
+            <%= tabler_icon('truck', size: '20', class: "#{current_page?(suppliers_path) ? 'text-[#7C5BF3]' : 'text-gray-400'}") %>
+            <span> Suppliers </span>
+          <% end %>
+        </li>
   </nav>
 </aside>
