@@ -1,7 +1,10 @@
 class Warehouse < ApplicationRecord
+  acts_as_tenant(:organization)
+
   # Associations
   has_many :stocks
   has_many :products, through: :stocks
+  belongs_to :organization
 
   # Validators
   validates :name, presence: true, length: { minimum: 2 }

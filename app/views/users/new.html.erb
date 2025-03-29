@@ -1,0 +1,61 @@
+<div class="flex justify-center items-center font-[sans-serif] h-full md:min-h-screen p-4">
+  <main class="grid justify-center max-w-md mx-auto">
+    <%= form_with(model: @user, html: { class: "bg-white rounded-2xl p-6 -mt-24 relative z-10 shadow-[0_2px_16px_-3px_rgba(6,81,237,0.3)]" }) do |f| %>
+      <% if @user.errors.any? %>
+        <section class="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <%= tabler_icon('alert-circle', size: '20', class: "w-5 h-5 text-red-400") %>
+            </div>
+            <div class="ml-3">
+              <h3 class="text-sm font-medium text-red-800">
+                <%= pluralize(@user.errors.count, "error") %> impidieron que este usuario se guardara:
+              </h3>
+              <div class="mt-2 text-sm text-red-700">
+                <ul class="list-disc pl-5 space-y-1">
+                  <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      <% end %>
+
+      <div class="mb-12">
+        <h1 class="text-3xl font-extrabold text-primary">Sign in</h1>
+      </div>
+
+      <section class="flex space-x-3">
+        <div class="relative flex items-center">
+          <%= f.label :name, class: "sr-only" %>
+          <%= f.text_field :name, placeholder: "Name", autofocus: true, class: "w-full text-gray-800 text-sm border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none" %>
+          <%= tabler_icon('user', size: '20', class: "w-[18px] h-[18px] absolute right-2 cursor-pointer") %>
+        </div>
+
+        <div class="relative flex items-center my-5">
+          <%= f.label :last_name, class: "sr-only" %>
+          <%= f.text_field :last_name, placeholder: "Last name", autofocus: true, class: "w-full text-gray-800 text-sm border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none" %>
+          <%= tabler_icon('user', size: '20', class: "w-[18px] h-[18px] absolute right-2 cursor-pointer") %>
+        </div>
+      </section>
+
+      <section class="relative flex items-center">
+        <%= f.label :email_address, class: "sr-only" %>
+        <%= f.email_field :email_address, placeholder: "Email", autofocus: true, class: "w-full text-gray-800 text-sm border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none" %>
+        <%= tabler_icon('mail', size: '20', class: "w-[18px] h-[18px] absolute right-2 cursor-pointer") %>
+      </section>
+
+      <section class="relative flex items-center my-5">
+        <%= f.label :password, class: "sr-only" %>
+        <%= f.password_field :password, placeholder: "Password", autofocus: true, class: "w-full text-gray-800 text-sm border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none" %>
+        <%= tabler_icon('eye', size: '20', class: "w-[18px] h-[18px] absolute right-2 cursor-pointer") %>
+      </section>
+
+      <section class="flex items-center">
+        <%= f.submit "Sign up", class: "flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+      </section>
+    <% end %>
+  </main>
+</div>

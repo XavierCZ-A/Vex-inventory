@@ -1,8 +1,13 @@
 class Product < ApplicationRecord
+  acts_as_tenant(:organization)
+
   # Associations
   belongs_to :category
   has_many :stocks
   has_many :warehouses, through: :stocks
+  belongs_to :organization
+
+
 
   # Validators
   validates :name, presence: true, format: {

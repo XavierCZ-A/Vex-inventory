@@ -1,0 +1,22 @@
+<% steps = ["Create organization", "Creata user"] %>
+
+<div class="w-96 flex items-center justify-between mx-auto space-x-4">
+  <% steps.each_with_index do |step_name, index| %>
+    <% step_number = index + 1 %>
+
+    <div class="relative flex flex-col items-center">
+      <div class="flex h-10 w-10 items-center justify-center rounded-full border-2 <%= step_classes(step_number, @current_step) %>">
+        <%= step_number < @current_step ? tabler_icon('check', size: '20') : step_number %>
+      </div>
+      <div class="mt-2 text-sm font-medium <%= step_number <= @current_step ? 'text-gray-900' : 'text-gray-400' %>">
+        <%= step_name %>
+      </div>
+    </div>
+
+    <% unless step_number == steps.length %>
+      <div class="flex-1 h-0.5 bg-gray-300 relative">
+        <div class="absolute top-0 left-0 h-full <%= step_number < @current_step ? 'bg-green-500' : 'bg-gray-300' %> w-full"></div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

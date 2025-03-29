@@ -34,5 +34,13 @@
             <span> Suppliers </span>
           <% end %>
         </li>
+      </ul>
+    </div>
+    <div class="p-2">
+      <%= link_to session_path(Current.user.id), data: { turbo_method: :delete, turbo_confirm: 'Are you sure' } ,class: "flex items-center space-x-3 text-sm text-white rounded-lg p-3 bg-[#FFA766] hover:bg-[#FF8A33]" do %>
+        <%= tabler_icon('logout', size: '20', color: "#ffffff") %>
+        <span> Logout </span>
+      <% end %>
+    </div>
   </nav>
 </aside>

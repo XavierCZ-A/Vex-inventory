@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :users, only: [ :create, :new ]
+  resource :session
+  resources :passwords, param: :token
+  resources :organizations
   resources :suppliers
   resources :stocks, except: :show
   resources :warehouses do
@@ -17,5 +21,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "products#index"
 end

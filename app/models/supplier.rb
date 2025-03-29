@@ -1,4 +1,8 @@
 class Supplier < ApplicationRecord
+  acts_as_tenant(:organization)
+
+  belongs_to :organization
+
   validates :company_name, presence: true, length: { minimum: 2 }, format: {
     with: /\A[a-zA-Z]+\z/,
     message: :invalid
