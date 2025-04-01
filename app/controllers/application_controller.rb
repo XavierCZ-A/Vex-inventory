@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def set_organization_as_tenant
     if Current.user
       organization = Current.user.organization
-      pp "Tenant =============> #{organization.inspect}"
+      pp "Tenant ============= > #{organization.inspect}"
       set_current_tenant(organization)
     end
   end

@@ -3,10 +3,10 @@ class StocksController < ApplicationController
 
   # GET /stocks or /stocks.json
   def index
-    if params[:id] # Accediendo desde `/warehouses/:id/stock`
+    if params[:id]
       @warehouse = Warehouse.find(params[:id])
       @stocks = @warehouse.stocks.includes(product: :category)
-    else # Accediendo desde `/product_stocks`
+    else
       @stocks = Stock.includes(product: :category)
     end
   end

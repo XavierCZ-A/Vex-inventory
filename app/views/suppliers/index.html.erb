@@ -13,25 +13,17 @@
   <div id="purchase_orders" class="min-w-full">
     <% if @suppliers.any? %>
       <section class="overflow-hidden p-2 rounded-lg border border-gray-200 shadow">
-        <table class="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-200">
           <thead>
-          <tr class="border-b border-[#E5E7EB]">
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Supplier
-            </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Phone
-            </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Email
-            </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Address
-            </th>
-          </tr>
+            <tr class="border-b border-[#E5E7EB]">
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">Supplier</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">Phone</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">Email</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">Address</th>
+            </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-          <%= render @suppliers %>
+            <%= render @suppliers %>
           </tbody>
         </table>
       </section>
@@ -41,9 +33,8 @@
           <%= tabler_icon('users-group', size: '100', class: "mx-auto text-gray-300") %>
         </div>
         <h3 class="text-xl font-semibold text-gray-800 mb-2">There are no suppliers</h3>
-        <p class="text-gray-600 mb-6">
-          This provider has no suppliers added. Do you want to add one now?</p>
-        <%= link_to new_supplier_path, class: "inline-flex items-center justify-center gap-2 p-2 rounded-lg bg-primary hover:bg-hover text-sm text-white transition-colors" do %>
+        <p class="text-gray-600 mb-6">This provider has no suppliers added. Do you want to add one now?</p>
+        <%= link_to new_supplier_path, class: "inline-flex items-center justify-center gap-2 p-2 rounded-lg bg-[#7C5BF3] hover:bg-[#9576F5] text-white transition-colors" do %>
           <%= tabler_icon('plus', size: '15') %>
           Add supplier
         <% end %>

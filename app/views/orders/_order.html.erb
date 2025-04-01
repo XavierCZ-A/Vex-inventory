@@ -1,26 +1,21 @@
-<div id="<%= dom_id order %>" class="w-full sm:w-auto space-y-5">
-  <tr class="bg-white hover:bg-gray-200">
-    <td>
-      <%= link_to order_path(order),
-                  class: "flex px-6 py-4 text-sm font-medium hover:underline transition duration-200 cursor-pointer" do %>
-        <%= order.order_number %>
-      <% end %>
-    </td>
-    <td class="px-6 py-4">
-      <p class="text-sm font-medium text-gray-900">
-        <%= order.order_date %>
-      </p>
-    </td>
-    <td class="px-6 py-4">
-      <%= form_with(url: update_status_order_path(order), method: :patch, local: false) do |form| %>
-        <%= form.select :status, 
-                Order.statuses.keys.map { |status| [status.humanize, status] }, 
-                { selected: order.status }, 
-                { onChange: 'this.form.requestSubmit()',
-                class: "form-select status-select",
-                style: "padding: 8px 12px; border-radius: 4px; border: 1px solid #ccc; background-color: #f8f9fa; font-size: 14px; cursor: pointer; min-width: 150px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"
-          } %>
-      <% end %>
-    </td>
-  </tr>
-</div>
+<tr id="<%= dom_id order %>" class="bg-white hover:bg-gray-200">
+  <td class="px-6 py-4">
+    <%= link_to order_path(order), class: "flex text-sm font-medium hover:underline transition duration-200 cursor-pointer" do %>
+      <%= order.order_number %>
+    <% end %>
+  </td>
+  <td class="px-6 py-4">
+    <p class="text-sm font-medium text-gray-900">
+      <%= order.order_date %>
+    </p>
+  </td>
+  <td class="px-6 py-4">
+    <%= form_with(url: update_status_order_path(order), method: :patch, local: false) do |form| %>
+      <%= form.select :status, 
+        Order.statuses.keys.map { |status| [status.humanize, status] }, 
+        { selected: order.status }, 
+        { onChange: 'this.form.requestSubmit()', class: "form-select status-select" }
+      %>
+    <% end %>
+  </td>
+</tr>

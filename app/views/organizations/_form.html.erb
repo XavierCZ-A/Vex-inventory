@@ -16,8 +16,19 @@
       <div class="flex justify-center items-center font-[sans-serif] h-full md:min-h-screen p-4">
         <main class="grid justify-center max-w-md mx-auto">
           <div class="bg-white rounded-2xl p-6 -mt-24 relative z-10 shadow-[0_2px_16px_-3px_rgba(6,81,237,0.3)]">
-            <div class="mb-12">
-              <h1 class="text-3xl font-extrabold text-primary">Sign in</h1>
+            <div class="flex items-start mb-4">
+              <div>
+                <div>
+                  <h1 class="text-3xl font-extrabold text-primary">Sign in</h1>
+                </div>
+                <div class="my-5 flex items-center bg-purple-50 text-purple-800 px-3 py-2 rounded-md">
+                  <%= tabler_icon('info-circle', size: '50', class: "mr-3") %>
+                  <p class="text-sm">
+                    The user you register here will be the <strong>Administrator</strong> with full access to
+                    manage the organization, users, and settings.
+                  </p>
+                </div>
+              </div>
             </div>
             <section>
               <div class="relative w-full flex items-center">

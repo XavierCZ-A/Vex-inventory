@@ -1,26 +1,18 @@
-<div id="<%= dom_id supplier %>" class="w-full sm:w-auto space-y-5">
-  <tr class="bg-white hover:bg-gray-200">
-    <td>
-      <%= link_to supplier_path(supplier),
-                  class: "flex px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-800 hover:underline transition duration-200 cursor-pointer" do %>
-        <%= tabler_icon('users', size: '20', class: 'text-indigo-600 mr-2') %>
-        <%= supplier.company_name %>
-      <% end %>
-    </td>
-    <td class="px-6 py-4 whitespace-nowrap">
-      <p class="text-sm font-medium text-gray-900">
-        <%= supplier.supplier_phone %>
-      </p>
-    </td>
-    <td class="px-6 py-4 whitespace-nowrap">
-      <p class="text-sm font-medium text-gray-900">
-        <%= supplier.supplier_email %>
-      </p>
-    </td>
-    <td class="px-6 py-4 whitespace-nowrap">
-      <p class="text-sm font-medium text-gray-900">
-        <%= supplier.supplier_address %>
-      </p>
-    </td>
-  </tr>
-</div>
+<tr id="<%= dom_id supplier %>" class="bg-white hover:bg-gray-200">
+  <td class="px-6 py-4 whitespace-nowrap w-1/4">
+    <%= link_to supplier_path(supplier), class: "text-sm font-medium hover:underline transition duration-200 cursor-pointer" do %>
+      <%= supplier.company_name %>
+    <% end %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap w-1/4">
+    <p class="text-sm font-medium text-gray-900"><%= supplier.supplier_phone %></p>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap w-1/4">
+    <p class="text-sm text-[#7C5BF3] hover:text-[#9576F5] font-medium hover:underline transition duration-200 cursor-pointer">
+      <%= supplier.supplier_email %>
+    </p>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap w-1/4">
+    <p class="text-sm font-medium text-gray-900"><%= supplier.supplier_address %></p>
+  </td>
+</tr>

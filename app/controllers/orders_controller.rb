@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[ show edit update destroy ]
+  before_action :set_order, only: %i[ show edit update destroy update_status ]
 
   # GET /orders or /orders.json
   def index
@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    @products = Product.all
   end
 
   # POST /orders or /orders.json
@@ -49,7 +50,7 @@ class OrdersController < ApplicationController
   end
 
   def update_status
-    @purchase_order.update(status: params[:status])
+    @order.update(status: params[:status])
     head :ok
   end
 

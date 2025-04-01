@@ -3,11 +3,6 @@ class OrganizationsController < ApplicationController
   before_action :set_organization, only: %i[ show edit update destroy ]
   layout "login_layout"
 
-  # GET /organizations or /organizations.json
-  def index
-    @organizations = Organization.all
-  end
-
   # GET /organizations/1 or /organizations/1.json
   def show
   end
@@ -61,10 +56,4 @@ class OrganizationsController < ApplicationController
     def organization_params
       params.require(:organization).permit(:name, users_attributes: [ :name, :last_name, :email_address, :password, :role ])
     end
-  # def purchase_order_params
-  #   params.require(:purchase_order).permit(
-  #     :delivery_date, :status, :order_date, :notes, :supplier_id, :payment_term_id, :delivery_address, :delivery_city, :delivery_postal_code, :delivery_province,
-  #     order_items_attributes: [ :id, :product_id, :quantity, :price, :total_amount, :_destroy ]
-  #   )
-  # end
 end
