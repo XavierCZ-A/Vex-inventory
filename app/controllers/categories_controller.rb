@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[ show edit update destroy ]
+  # before_action :set_category, only: %i[ show edit update destroy ]
 
   # GET /categories or /categories.json
   def index
@@ -15,16 +15,10 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to @category, notice: "Category was successfully created."
+      redirect_to categories_path, notice: "Category was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  # DELETE /categories/1 or /categories/1.json
-  def destroy
-    @category.destroy
-    redirect_to categories_path, status: :see_other, notice: "Category was successfully destroyed."
   end
 
   private

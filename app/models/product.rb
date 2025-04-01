@@ -11,10 +11,10 @@ class Product < ApplicationRecord
 
   # Validators
   validates :name, presence: true, format: {
-    with: /\A[a-zA-Z0-9]+\z/,
+    with: /\A[a-zA-Z0-9 ]+\z/,
     message: :invalid
   }
-  validates :price, presence: true, numericality: true
+  validates :price, presence: true, numericality: { greater_than: 0 }
   validates :category_id, presence: true
 
   scope :total_products_price, -> { sum(:price) }

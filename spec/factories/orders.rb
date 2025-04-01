@@ -3,8 +3,10 @@ FactoryBot.define do
     order_date { "2025-03-29" }
     order_number { "MyString" }
     notes { "MyText" }
-    status { 1 }
-    payment_term { nil }
-    supplier { nil }
+    delivery_date { Date.today + 7.days }
+    supplier
+    payment_term
+    organization
+    status { :pending }
   end
 end

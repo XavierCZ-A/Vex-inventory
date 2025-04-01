@@ -1,9 +1,10 @@
 FactoryBot.define do
   factory :order_item do
     quantity { 1 }
-    price { "9.99" }
+    price { BigDecimal('10.0') }
     total_amount { "9.99" }
-    order { nil }
-    product { nil }
+    product
+    order
+    organization
   end
 end

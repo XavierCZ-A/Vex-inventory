@@ -1,5 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe Stock, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:organization) { create(:organization) }
+  let(:product) { create(:product, organization: organization) }
+  let(:warehouse) { create(:warehouse, organization: organization) }
+  let(:stock) { create(:stock, product: product, warehouse: warehouse, organization: organization) }
+
+  describe 'associations' do
+    it { should belong_to(:product) }
+    it { should belong_to(:warehouse) }
+    it { should belong_to(:organization) }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:quantity) }
+    it { should validate_numericality_of(:quantity).is_greater_than(0) }
+
+    it { should validate_presence_of(:entry_date) }
+    it { should validate_presence_of(:product_id) }
+    it { should validate_presence_of(:warehouse_id) }
+  end
+
+  describe 'scopes' do
+    describe '.total_stock' do
+      it 'calculates the total quantity of all stocks' do
+        create(:stock, quantity: 10, product: product, warehouse: warehouse, organization: organization)
+        create(:stock, quantity: 20, product: product, warehouse: warehouse, organization: organization)
+        expect(Stock.total_stock).to eq(30)
+      end
+    end
+  end
 end
