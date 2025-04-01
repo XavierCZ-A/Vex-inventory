@@ -1,6 +1,7 @@
 class Supplier < ApplicationRecord
   acts_as_tenant(:organization)
 
+  has_many :orders, dependent: :destroy
   belongs_to :organization
 
   validates :company_name, presence: true, length: { minimum: 2 }, format: {

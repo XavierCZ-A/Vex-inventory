@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :order_items
+  resources :orders do
+    patch :update_status, on: :member
+  end
   resources :users, only: [ :create, :new ]
   resource :session
   resources :passwords, param: :token

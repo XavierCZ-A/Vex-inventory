@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_29_160231) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_30_000943) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -21,8 +21,47 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_29_160231) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity", null: false
+    t.decimal "price", precision: 10, scale: 2
+    t.decimal "total_amount", precision: 12, scale: 2
+    t.bigint "order_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "organization_id", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["organization_id"], name: "index_order_items_on_organization_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.date "order_date", null: false
+    t.string "order_number", null: false
+    t.text "notes"
+    t.integer "status", default: 0
+    t.bigint "payment_term_id", null: false
+    t.bigint "supplier_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "organization_id", null: false
+    t.date "delivery_date", null: false
+    t.index ["organization_id"], name: "index_orders_on_organization_id"
+    t.index ["payment_term_id"], name: "index_orders_on_payment_term_id"
+    t.index ["supplier_id"], name: "index_orders_on_supplier_id"
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payment_terms", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "days", null: false
+    t.text "description", null: false
+    t.boolean "active", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -97,6 +136,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_29_160231) do
     t.index ["organization_id"], name: "index_warehouses_on_organization_id"
   end
 
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "organizations"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "organizations"
+  add_foreign_key "orders", "payment_terms"
+  add_foreign_key "orders", "suppliers"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "organizations"
   add_foreign_key "sessions", "users"

@@ -1,0 +1,46 @@
+<!-- app/views/purchase_orders/_order_item_fields.html.erb -->
+<div class="order-item grid grid-cols-12 gap-2 items-end border border-gray-200 p-3 rounded-md mb-4" data-new-record="<%= f.object.new_record? %>">
+  <%= f.hidden_field :_destroy %>
+
+  <div class="col-span-4">
+    <%= f.label :product_id, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <div class="mt-1 relative rounded-md shadow-sm">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <%= tabler_icon('box', size: '15', class: "text-[#7C5BF3]") %>
+      </div>
+      <%= f.select :product_id, options_for_select(@products.present? ? @products.map { |p| [p.name, p.id, { data: { price: p.price } }] } : []),
+                   { prompt: "Select a product" },
+                   { class: "block w-full pl-10 pr-3 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500",
+                     data: { action: "change->order#updatePrice", order_target: "productSelect" } } %>
+
+    </div>
+  </div>
+
+  <div class="col-span-2">
+    <%= f.label :quantity, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= f.number_field :quantity,
+                       data: { order_target: "quantity", action: "change->order#calculateTotal" },
+                       class: "w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+  </div>
+
+  <div class="col-span-2">
+    <%= f.label :price, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= f.number_field :price,
+                       data: { order_target: "price", action: "change->order#calculateTotal" },
+                       class: "w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+    %>
+  </div>
+
+  <div class="col-span-2">
+    <%= f.label :total_amount, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= f.number_field :total_amount, readonly: true,
+                       data: { order_target: "totalAmount" },
+                       class: "w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+  </div>
+
+  <div class="col-span-1">
+    <button data-action="click->order#removeItem" class="w-full h-8 flex items-center justify-center text-red-500 hover:text-red-700 focus:outline-none">
+      <%= tabler_icon('trash', size: '20') %>
+    </button>
+  </div>
+</div>

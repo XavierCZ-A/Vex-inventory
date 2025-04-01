@@ -5,9 +5,9 @@ class Product < ApplicationRecord
   belongs_to :category
   has_many :stocks
   has_many :warehouses, through: :stocks
+  has_many :order_items, dependent: :destroy
+  has_many :orders, through: :order_items
   belongs_to :organization
-
-
 
   # Validators
   validates :name, presence: true, format: {
