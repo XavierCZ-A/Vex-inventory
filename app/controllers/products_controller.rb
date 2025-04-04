@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @product.stocks.build
   end
 
   # GET /products/1/edit
@@ -56,5 +57,10 @@ class ProductsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def product_params
       params.expect(product: [ :name, :description, :price, :category_id ])
+    end
+
+    def product_params
+      params.require(:product).permit(:name, :description, :price, :category_id,
+      stocks_attributes: [ :id, :warehouse_id, :quantity, :_destroy ])
     end
 end
