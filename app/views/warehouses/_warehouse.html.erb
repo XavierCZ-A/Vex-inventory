@@ -12,11 +12,7 @@
 
     <div class="flex justify-between items-center">
       <span class="text-gray-500">Stock actual:</span>
-      <% if @stock_by_warehouse.nil? %>
-        <span class="font-medium text-gray-900">0 unidades</span>
-      <% else %>
-        <span class="font-medium text-gray-900"><%= @stock_by_warehouse[warehouse.id] %> unidades</span>
-      <% end %>
+      <span class="font-medium text-gray-900"><%= warehouse.total_stock %> unidades</span>
     </div>
     <div class="space-y-2">
       <% if @ocupacity_by_warehouse && @ocupacity_by_warehouse[warehouse.id] %>

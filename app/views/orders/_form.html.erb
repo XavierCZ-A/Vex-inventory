@@ -42,7 +42,7 @@
     <div class="mb-6">
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-lg font-medium text-gray-800">Productos</h3>
-        <button type="button" data-action="click->order#addItem" class="flex items-center px-3 py-2 bg-[#7C5BF3] hover:bg-[#9576F5] text-white rounded-lg focus:outline-none focus:ring-2 ">
+        <button type="button" data-action="click->order#addItem" class="principal-button">
           <%= tabler_icon('plus', size: '15', class: "mr-2") %>
           Agregar Producto
         </button>
@@ -62,10 +62,10 @@
     </div>
 
     <div class="flex justify-between">
-      <%= link_to orders_path, class: 'flex items-center text-white bg-[#7C5BF3] hover:bg-[#9576F5] rounded-lg p-2' do %>
+      <%= link_to orders_path, class: 'button' do %>
         Back
       <% end %>
-      <%= form.submit class: "rounded-md px-3 py-2 bg-[#7C5BF3] hover:bg-[#9576F5] text-white inline-block font-medium cursor-pointer" %>
+      <%= form.submit class: "button" %>
     </div>
 
   <% end %>

@@ -14,11 +14,11 @@ class Warehouse < ApplicationRecord
   }
   validates :capacity, presence: true
 
-  def ocupacity_percentage
-    # Obtener el total de stock
-    total_stock = stocks.sum(:quantity) || 0
+  def total_stock
+    stocks.sum(:quantity) || 0
+  end
 
-    # Obtener la capacidad del warehouse directamente desde el modelo
+  def ocupacity_percentage
     ((total_stock.to_f / capacity) * 100).round(2)
   end
 end

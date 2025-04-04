@@ -24,7 +24,7 @@ class StocksController < ApplicationController
   def create
     @stock = Stock.new(stock_params)
     if @stock.save
-      redirect_to @stock, notice: "Stock was successfully created."
+      redirect_to products_path, notice: "Stock was successfully created."
     else
       render :new, status: :unprocessable_entity
     end

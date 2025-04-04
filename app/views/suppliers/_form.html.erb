@@ -1,7 +1,7 @@
-<%= form_with(model: supplier, class: "contents") do |form| %>
+<%= form_with(model: supplier, class: "contents flex flex-col items-center w-full", data: { controller: "sizes-fields" }) do |form| %>
   <% if supplier.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-      <h2><%= pluralize(supplier.errors.count, "error") %> prohibited this supplier from being saved:</h2>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3 w-80">
+      <h2><%= pluralize(supplier.errors.count, "error") %> prohibited this product from being saved:</h2>
 
       <ul class="list-disc ml-6">
         <% supplier.errors.each do |error| %>
@@ -11,64 +11,81 @@
     </div>
   <% end %>
 
-  <div class="my-5">
-    <%= form.label :company_name, class: "block text-sm font-medium text-gray-700 mb-1" %>
-    <div class="mt-1 relative rounded-md shadow-sm">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <%= tabler_icon('building-warehouse', size: '15', class: "text-[#7C5BF3]") %>
+  <div class="flex w-full items-center space-x-2">
+    <div class="w-full">
+      <%= form.label :company_name, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <div class="mt-1 relative rounded-md shadow-sm w-full">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <%= tabler_icon('building-warehouse', size: '15', class: "text-[#7C5BF3]") %>
+        </div>
+        <%= form.text_field :company_name, 
+        placeholder: "Nombre de la empresa",
+        class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:company_name].none?, "border-red-400 focus:outline-red-600": supplier.errors[:company_name].any? }] %>
       </div>
-      <%= form.text_field :company_name, class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:company_name].none?, "border-red-400 focus:outline-red-600": supplier.errors[:company_name].any?}] %>
-    </div>
+    </div> 
+
+    <div class="w-full">
+      <%= form.label :supplier_name, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <div class="mt-1 relative rounded-md shadow-sm w-full">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <%= tabler_icon('building-warehouse', size: '15', class: "text-[#7C5BF3]") %>
+        </div>
+        <%= form.text_field :supplier_name,
+        placeholder: "Nombre completo",
+        class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:supplier_name].none?, "border-red-400 focus:outline-red-600": supplier.errors[:supplier_name].any? }] %>
+      </div>
+    </div> 
   </div>
 
-  <div class="my-5">
-    <%= form.label :supplier_email, class: "block text-sm font-medium text-gray-700 mb-1" %>
-    <div class="mt-1 relative rounded-md shadow-sm">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <%= tabler_icon('mail', size: '15', class: "text-[#7C5BF3]") %>
+  <div class="flex w-full items-center space-x-2 my-5">
+    <div class="w-full">
+      <%= form.label :supplier_email, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <div class="mt-1 relative rounded-md shadow-sm w-full">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <%= tabler_icon('building-warehouse', size: '15', class: "text-[#7C5BF3]") %>
+        </div>
+        <%= form.text_field :supplier_email,
+        placeholder: "email@example.com",
+        class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:supplier_email].none?, "border-red-400 focus:outline-red-600": supplier.errors[:supplier_email].any? }] %>
       </div>
-      <%= form.text_field :supplier_email, class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:supplier_email].none?, "border-red-400 focus:outline-red-600": supplier.errors[:supplier_email].any?}] %>
-    </div>
+    </div> 
+
+    <div class="w-full">
+      <%= form.label :supplier_phone, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <div class="mt-1 relative rounded-md shadow-sm w-full">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <%= tabler_icon('building-warehouse', size: '15', class: "text-[#7C5BF3]") %>
+        </div>
+        <%= form.text_field :supplier_phone,
+        placeholder: "+52 XX XX XX XX XX",
+        class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:supplier_phone].none?, "border-red-400 focus:outline-red-600": supplier.errors[:supplier_phone].any? }] %>
+      </div>
+    </div> 
   </div>
 
-  <div class="my-5">
-    <%= form.label :supplier_name, class: "block text-sm font-medium text-gray-700 mb-1" %>
-    <div class="mt-1 relative rounded-md shadow-sm">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <%= tabler_icon('user', size: '15', class: "text-[#7C5BF3]") %>
-      </div>
-      <%= form.text_field :supplier_name, class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:supplier_name].none?, "border-red-400 focus:outline-red-600": supplier.errors[:supplier_name].any?}] %>
-    </div>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :supplier_phone, class: "block text-sm font-medium text-gray-700 mb-1" %>
-    <div class="mt-1 relative rounded-md shadow-sm">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <%= tabler_icon('phone', size: '15', class: "text-[#7C5BF3]") %>
-      </div>
-      <%= form.text_field :supplier_phone, class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:supplier_phone].none?, "border-red-400 focus:outline-red-600": supplier.errors[:supplier_phone].any?}] %>
-    </div>
-  </div>
-
-  <div class="my-5">
+  <div class="w-full mx-auto">
     <%= form.label :supplier_address, class: "block text-sm font-medium text-gray-700 mb-1" %>
-    <div class="mt-1 relative rounded-md shadow-sm">
+    <div class="mt-1 relative rounded-md shadow-sm w-full">
       <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <%= tabler_icon('map-pins', size: '15', class: "text-[#7C5BF3]") %>
+        <%= tabler_icon('package', size: '15', class: "text-[#7C5BF3]") %>
       </div>
-      <%= form.text_field :supplier_address, class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:supplier_address].none?, "border-red-400 focus:outline-red-600": supplier.errors[:supplier_address].any?}] %>
-    </div>
-  </div>
-  
-  <div class="my-3">
-    <%= form.label :notes, class: "block text-sm font-medium text-gray-700 mb-1" %>
-    <div class="mt-1 relative rounded-md shadow-sm">
-      <%= form.textarea :notes, rows: 4, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:notes].none?, "border-red-400 focus:outline-red-600": supplier.errors[:notes].any? }] %>
+      <%= form.text_field :supplier_address,
+      placeholder: "Direccion completa",
+      class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:supplier_address].none?, "border-red-400 focus:outline-red-600": supplier.errors[:supplier_address].any? }] %>
     </div>
   </div>
 
-  <div class="inline">
-    <%= form.submit class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  <div class="my-8 w-full mx-auto">
+    <%= form.label :notes, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <div class="mt-1 relative rounded-md shadow-sm w-full">
+      <%= form.textarea :notes, rows: 4,
+      placeholder: "Informacion adicional del proveedor",
+      class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:description].none?, "border-red-400 focus:outline-red-600": supplier.errors[:description].any? }] %>
+    </div>
+  </div>
+
+
+  <div class="mt-4 ml-auto">
+    <%= form.submit class: "flex items-center text-white bg-[#7C5BF3] hover:bg-[#9576F5] rounded-lg p-3" %>
   </div>
 <% end %>

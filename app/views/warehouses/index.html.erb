@@ -9,7 +9,7 @@
       </span>
     </h1>
     <% if @warehouses.any? %>
-      <%= link_to new_warehouse_path, class: 'principal-button' do %>
+      <%= link_to new_warehouse_path, class: 'principal-button', data: { turbo_frame: "modal" } do %>
       <%= tabler_icon('plus', size: '20', class: "mr-2") %>
         Add warehouse
       <% end %>

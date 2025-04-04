@@ -25,6 +25,7 @@
   <body>
     <main class="flex w-full h-screen">
       <%= render 'shared/sidebar' %>
+      <%= turbo_frame_tag "modal" %>
       <%= yield %>
     </main>
   </body>
