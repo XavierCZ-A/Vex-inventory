@@ -1,7 +1,7 @@
-<aside>
+<aside data-controller="sidebar">
   <nav class="w-64 h-full border border-gray-200 shadow-lg flex flex-col justify-between">
     <div>
-      <%= link_to "#", class: "flex items-center space-x-3 my-5 p-2 rounded-lg hover:bg-gray-100" do %>
+      <div class="flex items-center space-x-3 my-5 p-2">
         <div>
           <%= tabler_icon("box", size: 35) %>
         </div>
@@ -11,10 +11,10 @@
           </h2> 
           <span class="overflow-ellipsis text-xs">Enterprise</span>
         </div>
-        <div class="ml-auto mr-5">
-          <%= tabler_icon("caret-up-down", size: 15) %>
-        </div>
-      <% end %>
+        <button type="button" data-action="sidebar#toggle" class="ml-auto text-gray-500 hover:text-gray-700 border border-gray-200 hover:bg-gray-100 rounded-md p-1">
+          <%= tabler_icon("chevron-left", size: 15) %>
+        </button>
+      </div>
       <ul class="space-y-10 p-3">
         <li>
           <%= sidebar_link(text: "Products", path: products_path, icon_name: 'cube') %>

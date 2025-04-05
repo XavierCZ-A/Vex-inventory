@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @pagy, @products = pagy(Product.includes(:category))
+    @pagy, @products = pagy(Product.includes(:category).order(created_at: :desc))
     @total_products_price = Product.total_products_price
     @total_stock = Stock.total_stock
   end

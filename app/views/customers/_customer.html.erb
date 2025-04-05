@@ -23,10 +23,10 @@
       </p>
     </td>
     <td class="px-6 py-4 flex space-x-2 justify-center">
-      <%= link_to edit_customer_path(customer), class: "text-black p-2 " do %>
+      <%= link_to edit_customer_path(customer), class: "text-gray-600 hover:text-gray-800 p-2 ", data: { turbo_frame: "modal" } do %>
         <%= tabler_icon('edit', size: '20', class: "mr-2") %>
       <% end %>
-      <%= button_to customer, method: :delete, class: 'text-black p-2' do %>
+      <%= button_to customer, method: :delete, class: 'text-gray-600 hover:text-gray-800 p-2' do %>
         <%= tabler_icon('trash', size: '20', class: "mr-2") %>
       <% end %>
     </td>

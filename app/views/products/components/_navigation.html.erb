@@ -10,10 +10,6 @@
       <%= tabler_icon('file-type-csv', size: '20', class: "mr-2") %>
       Export products
     <% end %>
-    <%= link_to new_stock_path, class: 'principal-button' do %>
-      <%= tabler_icon('stack-3', size: '20', class: "mr-2") %>
-      Add stock
-    <% end %>
     <%= link_to new_product_path,
                 data: { turbo_frame: 'modal' },
                 class: 'principal-button' do %>

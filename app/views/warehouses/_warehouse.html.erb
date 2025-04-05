@@ -33,13 +33,15 @@
   </div>
 
   <div class="flex gap-4">
-    <%= link_to edit_warehouse_path(warehouse), class: "flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors" do %>
+    <%= link_to edit_warehouse_path(warehouse),
+    class: "flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors",
+    data: { turbo_frame: "modal" } do %>
       <%= tabler_icon('edit', size: '15') %>
       Edit
     <% end %>
     <%= link_to stock_warehouse_path(warehouse), class: "flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors" do %>
-      <%= tabler_icon('info-octagon', size: '15') %>
-      More info
+      <%= tabler_icon('package', size: '15') %>
+      View stock
     <% end %>
   </div>
 </div>
