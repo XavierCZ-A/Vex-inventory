@@ -6,6 +6,10 @@ class ProductsController < ApplicationController
     @pagy, @products = pagy(Product.includes(:category).order(created_at: :desc))
     @total_products_price = Product.total_products_price
     @total_stock = Stock.total_stock
+    respond_to do |format|
+      format.html
+      format.csv { send_data Product.to_csv, filename: "products-#{DateTime.now.strftime("%d%m%Y%H%M")}.csv" }
+    end
   end
 
   # GET /products/1 or /products/1.json

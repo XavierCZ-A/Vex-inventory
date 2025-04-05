@@ -3,7 +3,7 @@ class CustomersController < ApplicationController
 
   # GET /customers or /customers.json
   def index
-    @customers = Customer.all
+    @customers = Customer.all.order(created_at: :desc)
   end
 
   # GET /customers/1 or /customers/1.json
@@ -22,39 +22,26 @@ class CustomersController < ApplicationController
   # POST /customers or /customers.json
   def create
     @customer = Customer.new(customer_params)
-
-    respond_to do |format|
-      if @customer.save
-        format.html { redirect_to @customer, notice: "Customer was successfully created." }
-        format.json { render :show, status: :created, location: @customer }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @customer.errors, status: :unprocessable_entity }
-      end
+    if @customer.save
+      redirect_to customers_path, notice: "Customer was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /customers/1 or /customers/1.json
   def update
-    respond_to do |format|
-      if @customer.update(customer_params)
-        format.html { redirect_to @customer, notice: "Customer was successfully updated." }
-        format.json { render :show, status: :ok, location: @customer }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @customer.errors, status: :unprocessable_entity }
-      end
+    if @customer.update(customer_params)
+      redirect_to customers_path, notice: "Customer was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /customers/1 or /customers/1.json
   def destroy
     @customer.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to customers_path, status: :see_other, notice: "Customer was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to customers_path, status: :see_other, notice: "Customer was successfully destroyed."
   end
 
   private

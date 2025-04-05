@@ -1,3 +1,5 @@
+require "csv"
+
 class Product < ApplicationRecord
   acts_as_tenant(:organization)
 
@@ -21,4 +23,17 @@ class Product < ApplicationRecord
 
   scope :total_products_price, -> { sum(:price) }
   scope :order_by_date, -> { order(created_at: :desc) }
+
+  def self.to_csv
+    products = all.includes(:category)
+    CSV.generate(headers: true) do |csv|
+      headers = column_names - [ "category_id" ] + [ "category_name" ]
+      csv << headers
+      products.each do |product|
+        values = product.attributes.except("category_id").values
+        values << product.category&.name
+        csv << values
+      end
+    end
+  end
 end

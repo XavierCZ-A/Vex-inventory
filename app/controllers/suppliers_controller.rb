@@ -3,7 +3,7 @@ class SuppliersController < ApplicationController
 
   # GET /suppliers or /suppliers.json
   def index
-    @suppliers = Supplier.all
+    @suppliers = Supplier.all.order(created_at: :desc)
   end
 
   # GET /suppliers/1 or /suppliers/1.json
@@ -23,7 +23,7 @@ class SuppliersController < ApplicationController
   def create
     @supplier = Supplier.new(supplier_params)
     if @supplier.save
-      redirect_to @supplier, notice: "Supplier was successfully created."
+      redirect_to suppliers_path, notice: "Supplier was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
