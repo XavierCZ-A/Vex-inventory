@@ -3,13 +3,16 @@
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Orders</h1>
     <% if @orders.any? %>
-      <%= link_to new_order_path, class: "principal-button" do %>
-        <%= tabler_icon('truck-delivery', size: '20', class: "mr-2") %>
-        Create order
-      <% end %>
+      <%= render Ui::ButtonComponent.new(
+        path: new_order_path,
+        text: "Create order",
+        icon: "plus",
+        turbo_frame: "modal"
+      ) %>
     <% end %>
   </div>
   <hr class="w-full border-[#E5E7EB] mt-3 mb-5" />
+  <%= render "orders/components/summary" %>
   <div id="orders" class="overflow-hidden p-2 rounded-lg border border-gray-200 shadow">
     <% if @orders.any? %>
       <section class="relative overflow-x-auto">
@@ -27,17 +30,14 @@
         </table>
       </section>
     <% else %>
-      <div class="bg-white mx-auto p-8 text-center">
-        <div class="mb-6">
-          <%= tabler_icon('truck-delivery', size: '100', class: "mx-auto text-gray-300") %>
-        </div>
-        <h3 class="text-xl font-semibold text-gray-800 mb-2">There are no orders</h3>
-        <p class="text-gray-600 mb-6">This provider has no orders added. Do you want to add one now?</p>
-        <%= link_to new_order_path, class: "inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[#7C5BF3] hover:bg-[#9576F5] text-white transition-colors" do %>
-          <%= tabler_icon('user-plus', size: '15') %>
-          Add order
-        <% end %>
-      </div>
+      <%= render Shared::EmptyStateComponent.new(
+        title: "There are no orders",
+        description: "This provider has no orders added. Do you want to add one now?",
+        icon: "clipboard-check",
+        icon_button: "plus",
+        path: new_order_path,
+        text: "Create order"
+      ) %>
     <% end %>
   </div>
 </div>

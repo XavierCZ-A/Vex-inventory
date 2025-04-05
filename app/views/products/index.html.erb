@@ -4,6 +4,7 @@
   <hr class="w-full border-[#E5E7EB] mt-3 mb-3" />
   <%= render "products/components/summary" %>
   <div class="overflow-hidden p-2 rounded-lg border border-gray-200 shadow">
+    <% if @products.any? %>
     <section class="mt-3 relative overflow-x-auto">
       <table class="min-w-full bg-white">
         <thead>
@@ -30,6 +31,17 @@
         </tbody>
       </table>
     </section>
+    <% else %>
+      <%= render Shared::EmptyStateComponent.new(
+        title: "There are no products",
+        description: "This provider has no products added. Do you want to add one now?",
+        icon: "box",
+        icon_button: "plus",
+        path: new_product_path,
+        text: "Add product",
+        turbo_frame: "modal"
+      ) %>
+    <% end %>
   </div>
   <%== pagy_nav(@pagy) %>
 </main>

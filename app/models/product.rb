@@ -5,7 +5,7 @@ class Product < ApplicationRecord
 
   # Associations
   belongs_to :category
-  has_many :stocks
+  has_many :stocks, dependent: :destroy
   has_many :warehouses, through: :stocks
   has_many :order_items, dependent: :destroy
   has_many :orders, through: :order_items
@@ -23,6 +23,14 @@ class Product < ApplicationRecord
 
   scope :total_products_price, -> { sum(:price) }
   scope :order_by_date, -> { order(created_at: :desc) }
+
+  def self.with_zero_stock
+    joins(:stocks).where(stocks: { quantity: 0 }).distinct
+  end
+
+  def self.count_with_zero_stock
+    with_zero_stock.count
+  end
 
   def self.to_csv
     products = all.includes(:category)

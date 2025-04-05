@@ -4,12 +4,12 @@
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Customers</h1>
     <% if @customers.any? %>
-      <%= link_to new_customer_path, 
-      class: 'principal-button',
-      data: { turbo_frame: "modal" } do %>
-        <%= tabler_icon('plus', size: '20', class: "mr-2") %>
-        Add customer
-      <% end %>
+      <%= render Ui::ButtonComponent.new(
+        path: new_customer_path,
+        text: "Add customer",
+        icon: "plus",
+        turbo_frame: "modal"
+      ) %>
     <% end %>
   </div>
   <hr class="w-full border-[#E5E7EB] mt-3 mb-5" />
@@ -31,19 +31,15 @@
         </table>
       </section>
     <% else %>
-      <div class="bg-white p-8 text-center">
-        <div class="mb-6">
-          <%= tabler_icon('users-group', size: '100', class: "mx-auto text-gray-300") %>
-        </div>
-        <h3 class="text-xl font-semibold text-gray-800 mb-2">There are no customers</h3>
-        <p class="text-gray-600 mb-6">This provider has no customers added. Do you want to add one now?</p>
-        <%= link_to new_customer_path,
-        data: { turbo_frame: "modal" },
-        class: "inline-flex items-center justify-center gap-2 p-2 rounded-lg bg-[#7C5BF3] hover:bg-[#9576F5] text-white transition-colors" do %>
-          <%= tabler_icon('plus', size: '15') %>
-          Add customer
-        <% end %>
-      </div>
+      <%= render Shared::EmptyStateComponent.new(
+        title: "There are no customers",
+        description: "This provider has no customers added. Do you want to add one now?",
+        icon: "users-group",
+        icon_button: "plus",
+        path: new_customer_path,
+        text: "Add customer",
+        turbo_frame: "modal"
+      ) %>
     <% end %>
   </div>
 </div>

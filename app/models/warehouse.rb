@@ -14,6 +14,10 @@ class Warehouse < ApplicationRecord
   }
   validates :capacity, presence: true
 
+  def self.total_stock
+    joins(:stocks).sum(:quantity)
+  end
+
   def total_stock
     stocks.sum(:quantity) || 0
   end

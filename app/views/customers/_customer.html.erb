@@ -1,10 +1,13 @@
 <div id="<%= dom_id customer %>" class="w-full sm:w-auto space-y-5">
     <tr class="bg-white hover:bg-gray-200">
     <td class="px-6 py-4">
-      <%= link_to customer_path(customer),
-                  class: "text-sm font-medium hover:underline transition duration-200 cursor-pointer" do %>
-        <%= customer.name %>
-      <% end %>
+      <div class="flex items-center space-x-2">
+        <%= user_avatar(customer.name) %>
+        <%= link_to customer_path(customer),
+                    class: "text-sm font-medium hover:underline transition duration-200 cursor-pointer" do %>
+          <%= customer.name %>
+        <% end %>
+      </div>
     </td>
     <td class="px-6 py-4">
       <p class="text-sm font-medium text-gray-900">

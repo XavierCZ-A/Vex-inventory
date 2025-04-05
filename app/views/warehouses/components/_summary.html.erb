@@ -1,0 +1,22 @@
+<%= render(Shared::SummaryCardComponent.new(title: "Resumen de Productos")) do |warehouse| %>
+  <% warehouse.with_card(
+    title: "Total de almacenes",
+    value: @warehouses.count,
+    icon: "box"
+  ) %>
+  
+  <% warehouse.with_card(
+    title: "Capacidad total",
+    value: @warehouses.sum(:capacity),
+    icon: "meter-cube",
+    formatter: :delimiter
+  ) %>
+  
+  <% warehouse.with_card(
+    title: "Stock disponible",
+    value: @warehouses.total_stock,
+    icon: "stack-3",
+    formatter: :delimiter
+  ) %>
+  
+<% end %>

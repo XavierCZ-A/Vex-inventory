@@ -14,42 +14,37 @@
   <div class="flex w-full items-center space-x-2">
     <div class="w-full">
       <%= form.label :name, class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <div class="mt-1 relative rounded-md shadow-sm w-full">
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <%= tabler_icon('building-warehouse', size: '15', class: "text-[#7C5BF3]") %>
-        </div>
-        <%= form.text_field :name,
-        placeholder: "Almacen central",
-        class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": warehouse.errors[:name].none?, "border-red-400 focus:outline-red-600": warehouse.errors[:name].any? }] %>
-      </div>
+      <%= render Ui::InputComponent.new(
+        form: form,
+        attribute: :name,
+        icon: "building-warehouse",
+        placeholder: "Nombre del almacén",
+        type: :text
+      ) %>
     </div> 
 
     <div class="w-full">
       <%= form.label :capacity, class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <div class="mt-1 relative rounded-md shadow-sm w-full">
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <%= tabler_icon('meter-cube', size: '20', class: "text-[#7C5BF3]") %>
-        </div>
-        <%= form.number_field :capacity,
-        placeholder: "3000",
-        class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": warehouse.errors[:capacity].none?, "border-red-400 focus:outline-red-600": warehouse.errors[:capacity].any? }] %>
-      </div>
+      <%= render Ui::InputComponent.new(
+        form: form,
+        attribute: :capacity,
+        icon: "building-warehouse",
+        placeholder: "Capacidad del almacén",
+        type: :text
+      ) %>
     </div>
   </div>
 
   <div class="w-full mx-auto my-5">
     <%= form.label :address, class: "block text-sm font-medium text-gray-700 mb-1" %>
-    <div class="mt-1 relative rounded-md shadow-sm w-full">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <%= tabler_icon('map-pin', size: '15', class: "text-[#7C5BF3]") %>
-      </div>
-      <%= form.text_field :address,
-      placeholder: "Av Principal #123, Colonia Centro",
-      class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": warehouse.errors[:address].none?, "border-red-400 focus:outline-red-600": warehouse.errors[:address].any? }] %>
-    </div>
+    <%= render Ui::InputComponent.new(
+      form: form,
+      attribute: :address,
+      icon: "map-pin",
+      placeholder: "Dirección del almacén",
+      type: :text
+    ) %>
   </div>
-
-
 
   <div class="mt-4 ml-auto">
     <%= form.submit class: "flex items-center text-white bg-[#7C5BF3] hover:bg-[#9576F5] rounded-lg p-3" %>

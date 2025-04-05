@@ -15,6 +15,15 @@ class Order < ApplicationRecord
   validates :order_date, presence: true
   validates :payment_term_id, presence: true
 
+
+  def self.total_cost
+    joins(:order_items).sum("order_items.total_amount")
+  end
+
+  def self.pending_orders
+    where(status: :pending)
+  end
+
   def generate_order_number
     year = Date.today.year
 

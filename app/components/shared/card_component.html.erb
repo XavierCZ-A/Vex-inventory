@@ -1,0 +1,9 @@
+<article class="summary-card">
+  <h2 class="text-sm text-gray-500 mb-2"><%= title %></h2>
+  <div class="flex items-center justify-between">
+    <p class="text-2xl font-bold"><%= formatted_value %></p>
+    <span class="<%= color_classes %> rounded-full p-2">
+      <%= helpers.tabler_icon(icon, size: 30) %>
+    </span>
+  </div>
+</article>

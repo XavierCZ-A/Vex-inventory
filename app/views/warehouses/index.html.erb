@@ -1,6 +1,6 @@
 <% content_for :title, "Warehouses" %>
 
-<div class="w-full h-full overflow-hidden p-3">
+<div class="w-full h-full overflow-hidden p-3 overflow-y-auto scrollbar-hide">
   <div class="flex justify-between items-center mb-3">
     <h1 class="text-2xl font-extrabold text-gray-800">
       Warehouses
@@ -9,32 +9,31 @@
       </span>
     </h1>
     <% if @warehouses.any? %>
-      <%= link_to new_warehouse_path, class: 'principal-button', data: { turbo_frame: "modal" } do %>
-      <%= tabler_icon('plus', size: '20', class: "mr-2") %>
-        Add warehouse
-      <% end %>
+      <%= render Ui::ButtonComponent.new(
+        path: new_warehouse_path,
+        text: "Add warehouse",
+        icon: "plus",
+        turbo_frame: "modal"
+      ) %>
     <% end %>
   </div>
   <hr class="w-full border-[#E5E7EB] mt-3 mb-3" />
-
-  <div id="warehouses" class="flex flex-wrap gap-4 max-h-[95%] overflow-y-auto scrollbar-hide">
+  <%= render "warehouses/components/summary" %>
+  <div id="warehouses" class="flex flex-wrap gap-4">
     <% if @warehouses.any? %>
       <% @warehouses.each do |warehouse| %>
         <%= render warehouse %>
       <% end %>
   </div>
   <% else %>
-  <div class="bg-white mx-auto p-8 text-center">
-    <div class="mb-6">
-      <%= tabler_icon('building-warehouse', size: '100', class: "mx-auto text-gray-300") %>
-    </div>
-    <h3 class="text-xl font-semibold text-gray-800 mb-2">There are no warehouse</h3>
-    <p class="text-gray-600 mb-6">
-      This provider has no warehouse added. Do you want to add one now?</p>
-    <%= link_to new_warehouse_path, class: "inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[#7C5BF3] hover:bg-[#9576F5] text-white transition-colors" do %>
-      <%= tabler_icon('user-plus', size: '15') %>
-      Add warehouse
-    <% end %>
-  </div>
+    <%= render Shared::EmptyStateComponent.new(
+      title: "There are no warehouse",
+      description: "This provider has no warehouse added. Do you want to add one now?",
+      icon: "building-warehouse",
+      icon_button: "plus",
+      path: new_warehouse_path,
+      text: "Add warehouse",
+      turbo_frame: "modal"
+    ) %>
 <% end %>
 </div>

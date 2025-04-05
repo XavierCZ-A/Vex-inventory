@@ -14,65 +14,60 @@
   <div class="flex w-full items-center space-x-2">
     <div class="w-full">
       <%= form.label :company_name, class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <div class="mt-1 relative rounded-md shadow-sm w-full">
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <%= tabler_icon('building-warehouse', size: '15', class: "text-[#7C5BF3]") %>
-        </div>
-        <%= form.text_field :company_name, 
+      <%= render Ui::InputComponent.new(
+        form: form,
+        attribute: :company_name,
+        icon: "building",
         placeholder: "Nombre de la empresa",
-        class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:company_name].none?, "border-red-400 focus:outline-red-600": supplier.errors[:company_name].any? }] %>
-      </div>
+        type: :text
+      ) %>
     </div> 
 
     <div class="w-full">
       <%= form.label :supplier_name, class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <div class="mt-1 relative rounded-md shadow-sm w-full">
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <%= tabler_icon('building-warehouse', size: '15', class: "text-[#7C5BF3]") %>
-        </div>
-        <%= form.text_field :supplier_name,
+      <%= render Ui::InputComponent.new(
+        form: form,
+        attribute: :supplier_name,
+        icon: "user",
         placeholder: "Nombre completo",
-        class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:supplier_name].none?, "border-red-400 focus:outline-red-600": supplier.errors[:supplier_name].any? }] %>
-      </div>
+        type: :text
+      ) %>
     </div> 
   </div>
 
   <div class="flex w-full items-center space-x-2 my-5">
     <div class="w-full">
       <%= form.label :supplier_email, class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <div class="mt-1 relative rounded-md shadow-sm w-full">
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <%= tabler_icon('building-warehouse', size: '15', class: "text-[#7C5BF3]") %>
-        </div>
-        <%= form.text_field :supplier_email,
+      <%= render Ui::InputComponent.new(
+        form: form,
+        attribute: :supplier_email,
+        icon: "mail",
         placeholder: "email@example.com",
-        class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:supplier_email].none?, "border-red-400 focus:outline-red-600": supplier.errors[:supplier_email].any? }] %>
-      </div>
+        type: :email
+      ) %>
     </div> 
 
     <div class="w-full">
       <%= form.label :supplier_phone, class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <div class="mt-1 relative rounded-md shadow-sm w-full">
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <%= tabler_icon('building-warehouse', size: '15', class: "text-[#7C5BF3]") %>
-        </div>
-        <%= form.text_field :supplier_phone,
-        placeholder: "+52 XX XX XX XX XX",
-        class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:supplier_phone].none?, "border-red-400 focus:outline-red-600": supplier.errors[:supplier_phone].any? }] %>
-      </div>
+      <%= render Ui::InputComponent.new(
+        form: form,
+        attribute: :supplier_phone,
+        icon: "phone",
+        placeholder: "+52 XX XXXX XXXX",
+        type: :text
+      ) %>
     </div> 
   </div>
 
   <div class="w-full mx-auto">
     <%= form.label :supplier_address, class: "block text-sm font-medium text-gray-700 mb-1" %>
-    <div class="mt-1 relative rounded-md shadow-sm w-full">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <%= tabler_icon('package', size: '15', class: "text-[#7C5BF3]") %>
-      </div>
-      <%= form.text_field :supplier_address,
+    <%= render Ui::InputComponent.new(
+      form: form,
+      attribute: :supplier_address,
+      icon: "map-pin",
       placeholder: "Direccion completa",
-      class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:supplier_address].none?, "border-red-400 focus:outline-red-600": supplier.errors[:supplier_address].any? }] %>
-    </div>
+      type: :text
+    ) %>
   </div>
 
   <div class="my-8 w-full mx-auto">
@@ -83,6 +78,7 @@
       class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": supplier.errors[:description].none?, "border-red-400 focus:outline-red-600": supplier.errors[:description].any? }] %>
     </div>
   </div>
+
 
 
   <div class="mt-4 ml-auto">

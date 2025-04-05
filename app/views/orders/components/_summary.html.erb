@@ -1,0 +1,24 @@
+<%= render(Shared::SummaryCardComponent.new(title: "Resumen de ordenes")) do |dashboard| %>
+  <% dashboard.with_card(
+    title: "Total de ordenes",
+    value: @orders.count,
+    icon: "clipboard-check"
+  ) %>
+  
+  <% dashboard.with_card(
+    title: "Gastos $",
+    value: @orders.total_cost,
+    icon: "currency-dollar",
+    formatter: :currency,
+    color: "green"
+  ) %>
+  
+  <% dashboard.with_card(
+    title: "Pendientes",
+    value: @orders.pending_orders.count,
+    icon: "clock",
+    color: "yellow",
+    formatter: :delimiter
+  ) %>
+
+<% end %>

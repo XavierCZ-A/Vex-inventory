@@ -19,14 +19,13 @@
 
   <div class="w-full mx-auto">
     <%= form.label :name, class: "block text-sm font-medium text-gray-700 mb-1" %>
-    <div class="mt-1 relative rounded-md shadow-sm w-full">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <%= tabler_icon('package', size: '15', class: "text-[#7C5BF3]") %>
-      </div>
-      <%= form.text_field :name,
+    <%= render Ui::InputComponent.new(
+      form: form,
+      attribute: :name,
+      icon: "package",
       placeholder: "Nombre del producto",
-      class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": product.errors[:name].none?, "border-red-400 focus:outline-red-600": product.errors[:name].any? }] %>
-    </div>
+      type: :text
+    ) %>
   </div>
 
   <div class="my-8 w-full mx-auto">
@@ -51,14 +50,13 @@
 
     <div class="w-full">
       <%= form.label :price, "Price ($)", class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <div class="mt-1 relative rounded-md shadow-sm w-full">
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <%= tabler_icon('currency-dollar', size: '15', class: "text-[#7C5BF3]") %>
-        </div>
-        <%= form.number_field :price,
+      <%= render Ui::InputComponent.new(
+        form: form,
+        attribute: :price,
+        icon: "currency-dollar",
         placeholder: "0.00",
-        class: ["block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": product.errors[:price].none?, "border-red-400 focus:outline-red-600": product.errors[:price].any? }] %>
-      </div>
+        type: :number
+      ) %>
     </div>
   </div>
 
