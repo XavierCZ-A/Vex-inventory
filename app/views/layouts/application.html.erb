@@ -24,6 +24,7 @@
 
   <body>
     <main class="flex w-full h-screen">
+      <%= render 'shared/flash' %>
       <%= render 'shared/sidebar' %>
       <%= turbo_frame_tag "modal" %>
       <%= yield %>

@@ -1,0 +1,22 @@
+<div data-controller="flash">
+  <% if alert || notice %>
+    <% color = alert ? 'text-red-400' : 'text-green-400' %>
+    <% flash_type = alert ? 'text-red-500 bg-red-50' : 'text-green-500 bg-green-50' %>
+    <div class="fixed top-4 right-4 max-w-sm">
+      <div class="flex items-center space-x-4 border shadow-lg rounded px-4 py-3 opacity-100 <%= flash_type %>" data-flash-target="flash">
+        <div class=" <%= color %>">
+          <% if alert %>
+            <%= tabler_icon('alert-triangle', size: '25') %>
+          <% else %>
+            <%= tabler_icon('checkbox', size: '25') %>
+          <% end %>
+        </div>
+        <p>
+          <%= alert || notice %>
+        </p>
+        <button class="inline-flex focus:outline-none focus:text-gray-300 transition ease-in-out duration-150" data-action="click->flash#close">
+        </button>
+      </div>
+    </div>
+  <% end %>
+</div>

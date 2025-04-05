@@ -5,5 +5,6 @@ FactoryBot.define do
     phone { "MyString" }
     company_name { "MyString" }
     address { "MyString" }
+    organization
   end
 end
