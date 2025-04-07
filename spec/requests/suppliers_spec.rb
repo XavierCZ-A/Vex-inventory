@@ -13,16 +13,37 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/suppliers", type: :request do
+  let(:organization) { create(:organization) }
+  let(:user) { create(:user, organization: organization, password: 'password') }
+  let(:supplier) { create(:supplier, organization: organization) }
+
+
   before do
-    login_user
+    sign_in(user)
   end
 
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      company_name: "Test Company",
+      supplier_name: "Test Supplier",
+      supplier_email: "test@example.com",
+      supplier_phone: "1234567890",
+      supplier_address: "123 Main St, Anytown, USA",
+      notes: "Test notes",
+      organization_id: organization.id
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      company_name: nil,
+      supplier_name: nil,
+      supplier_email: nil,
+      supplier_phone: nil,
+      supplier_address: nil,
+      notes: nil,
+      organization_id: nil
+    }
   }
 
   describe "GET /index" do
@@ -66,7 +87,7 @@ RSpec.describe "/suppliers", type: :request do
 
       it "redirects to the created supplier" do
         post suppliers_url, params: { supplier: valid_attributes }
-        expect(response).to redirect_to(supplier_url(Supplier.last))
+        expect(response).to redirect_to(suppliers_url)
       end
     end
 
@@ -87,14 +108,28 @@ RSpec.describe "/suppliers", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          company_name: "Updated Company",
+          supplier_name: "Updated Supplier",
+          supplier_email: "updated@example.com",
+          supplier_phone: "9876543210",
+          supplier_address: "456 Main St, Anytown, USA",
+          notes: "Updated notes",
+          organization_id: organization.id
+        }
       }
 
       it "updates the requested supplier" do
         supplier = Supplier.create! valid_attributes
         patch supplier_url(supplier), params: { supplier: new_attributes }
         supplier.reload
-        skip("Add assertions for updated state")
+        expect(supplier.company_name).to eq("Updated Company")
+        expect(supplier.supplier_name).to eq("Updated Supplier")
+        expect(supplier.supplier_email).to eq("updated@example.com")
+        expect(supplier.supplier_phone).to eq("9876543210")
+        expect(supplier.supplier_address).to eq("456 Main St, Anytown, USA")
+        expect(supplier.notes).to eq("Updated notes")
+        expect(supplier.organization_id).to eq(organization.id)
       end
 
       it "redirects to the supplier" do

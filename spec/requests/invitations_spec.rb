@@ -12,8 +12,9 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/categories", type: :request do
+RSpec.describe "/invitations", type: :request do
   let(:organization) { create(:organization) }
+  let(:customer) { create(:customer, organization: organization) }
   let(:user) { create(:user, organization: organization, password: 'password') }
 
   before do
@@ -22,56 +23,58 @@ RSpec.describe "/categories", type: :request do
 
   let(:valid_attributes) {
     {
-      name: "Test Category",
-      descripcion: "Test description"
+      email: "test@example.com",
+      organization_id: organization.id,
+      name: "Test User"
     }
   }
 
   let(:invalid_attributes) {
     {
-      name: nil,
-      descripcion: nil
+      email: "invalid-email",
+      organization_id: organization.id,
+      name: ""
     }
   }
 
   describe "GET /index" do
     it "renders a successful response" do
-      Category.create! valid_attributes
-      get categories_url
+      Invitation.create! valid_attributes
+      get invitations_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_category_url
+      get new_invitation_url
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new Category" do
+      it "creates a new Invitation" do
         expect {
-          post categories_url, params: { category: valid_attributes }
-        }.to change(Category, :count).by(1)
+          post invitations_url, params: { invitation: valid_attributes }
+        }.to change(Invitation, :count).by(1)
       end
 
-      it "redirects to the created category" do
-        post categories_url, params: { category: valid_attributes }
-        expect(response).to redirect_to(categories_url)
+      it "redirects to the created invitation" do
+        post invitations_url, params: { invitation: valid_attributes }
+        expect(response).to redirect_to(invitations_url)
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new Category" do
+      it "does not create a new Invitation" do
         expect {
-          post categories_url, params: { category: invalid_attributes }
-        }.to change(Category, :count).by(0)
+          post invitations_url, params: { invitation: invalid_attributes }
+        }.to change(Invitation, :count).by(0)
       end
 
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post categories_url, params: { category: invalid_attributes }
+        post invitations_url, params: { invitation: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end

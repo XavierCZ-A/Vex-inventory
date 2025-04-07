@@ -13,16 +13,29 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/warehouses", type: :request do
+  let(:organization) { create(:organization) }
+  let(:user) { create(:user, organization: organization, password: 'password') }
+
   before do
-    login_user
+    sign_in(user)
   end
 
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      name: "Test Warehouse",
+      address: "123 Main St, Anytown, USA",
+      capacity: 100,
+      organization_id: organization.id
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      name: nil,
+      address: nil,
+      capacity: nil,
+      organization_id: nil
+    }
   }
 
   describe "GET /index" do
@@ -66,7 +79,7 @@ RSpec.describe "/warehouses", type: :request do
 
       it "redirects to the created warehouse" do
         post warehouses_url, params: { warehouse: valid_attributes }
-        expect(response).to redirect_to(warehouse_url(Warehouse.last))
+        expect(response).to redirect_to(warehouses_url)
       end
     end
 
@@ -87,14 +100,22 @@ RSpec.describe "/warehouses", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          name: "Updated Warehouse",
+          address: "456 Main St, Anytown, USA",
+          capacity: 200,
+          organization_id: organization.id
+        }
       }
 
       it "updates the requested warehouse" do
         warehouse = Warehouse.create! valid_attributes
         patch warehouse_url(warehouse), params: { warehouse: new_attributes }
         warehouse.reload
-        skip("Add assertions for updated state")
+        expect(warehouse.name).to eq("Updated Warehouse")
+        expect(warehouse.address).to eq("456 Main St, Anytown, USA")
+        expect(warehouse.capacity).to eq(200)
+        expect(warehouse.organization_id).to eq(organization.id)
       end
 
       it "redirects to the warehouse" do

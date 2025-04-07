@@ -5,7 +5,7 @@ class Supplier < ApplicationRecord
   belongs_to :organization
 
   validates :company_name, presence: true, length: { minimum: 2 }, format: {
-    with: /\A[a-zA-Z]+\z/,
+    with: /\A[a-zA-Z\s]+\z/,
     message: :invalid
   }
   validates :supplier_name, presence: true, length: { minimum: 2 }, format: {

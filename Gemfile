@@ -76,3 +76,5 @@ gem "csv", "~> 3.3"
 gem "bullet", group: "development"
 gem "acts_as_tenant"
 gem "view_component"
+gem "letter_opener", group: :development
+gem "letter_opener_web", group: :development

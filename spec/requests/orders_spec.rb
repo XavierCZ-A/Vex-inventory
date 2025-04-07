@@ -13,16 +13,39 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/orders", type: :request do
+  let(:organization) { create(:organization) }
+  let(:order) { create(:order, organization: organization) }
+  let(:supplier) { create(:supplier, organization: organization) }
+  let(:payment_term) { create(:payment_term) }
+  let(:user) { create(:user, organization: organization, password: 'password') }
+
   before do
-    login_user
+    sign_in(user)
   end
 
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      order_date: Date.today,
+      order_number: "PO-2025-001",
+      notes: "Test notes",
+      delivery_date: Date.today + 7.days,
+      supplier_id: supplier.id,
+      payment_term_id: payment_term.id,
+      organization_id: organization.id
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      order_date: nil,
+      order_number: nil,
+      notes: nil,
+      delivery_date: nil,
+      supplier_id: nil,
+      payment_term_id: nil,
+      organization_id: nil
+    }
   }
 
   describe "GET /index" do
@@ -87,14 +110,28 @@ RSpec.describe "/orders", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          order_date: Date.today + 1.day,
+          order_number: "PO-2025-001",
+          notes: "Updated notes",
+          delivery_date: Date.today + 8.days,
+          supplier_id: supplier.id,
+          payment_term_id: payment_term.id,
+          organization_id: organization.id
+        }
       }
 
       it "updates the requested order" do
         order = Order.create! valid_attributes
         patch order_url(order), params: { order: new_attributes }
         order.reload
-        skip("Add assertions for updated state")
+        expect(order.order_date).to eq(Date.today + 1.day)
+        expect(order.order_number).to eq("PO-2025-001")
+        expect(order.notes).to eq("Updated notes")
+        expect(order.delivery_date).to eq(Date.today + 8.days)
+        expect(order.supplier_id).to eq(supplier.id)
+        expect(order.payment_term_id).to eq(payment_term.id)
+        expect(order.organization_id).to eq(organization.id)
       end
 
       it "redirects to the order" do

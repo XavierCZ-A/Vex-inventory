@@ -2,8 +2,8 @@
   <nav class="w-64 h-full border border-gray-200 shadow-lg flex flex-col justify-between">
     <div>
       <div class="flex items-center space-x-3 my-5 p-2">
-        <div>
-          <%= tabler_icon("box", size: 35) %>
+        <div class="bg-primary rounded-lg p-1 text-white">
+          <%= tabler_icon("rocket", size: 35) %>
         </div>
         <div class="flex flex-col text-start leading-tight overflow-hidden">
           <h2 className="text-xl font-semibold animate-fade-in">
@@ -31,6 +31,9 @@
         <li>
           <%= sidebar_link(text: "Customers", path: customers_path, icon_name: 'users') %>
         </li>
+        <li>
+          <%= sidebar_link(text: "Invitations", path: invitations_path, icon_name: 'user-plus') if Current.user.admin? %>
+        </li>
       </ul>
     </div>
     <div class="p-2">
@@ -38,6 +41,18 @@
         <%= tabler_icon('logout', size: '20', color: "#ffffff") %>
         <span> Logout </span>
       <% end %>
+    </div>
+    <div>
+      <div class="flex items-center space-x-3 text-sm rounded-lg p-3">
+        <div class="flex shrink-0 overflow-hidden rounded-lg">
+          <%= user_avatar(Current.user.name) %>
+        </div>
+        <div class="flex flex-col text-start leading-tight overflow-hidden">
+          <span class="overflow-ellipsis max-i-full font-semibold"><%= Current.user.full_name %></span>
+          <span class="overflow-ellipsis max-i-full text-xs"><%= Current.user.email_address %></span>
+        </div>
+        <img class="colorize-black mis-auto" aria-hidden="true" src="/assets/chevrons-up-down-dc468896.svg" width="16" height="16" />
+      </div>
     </div>
   </nav>
 </aside>

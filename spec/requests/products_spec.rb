@@ -13,16 +13,33 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/products", type: :request do
+  let(:organization) { create(:organization) }
+  let(:user) { create(:user, organization: organization, password: 'password') }
+  let(:category) { create(:category) }
+  let(:product) { create(:product, organization: organization, category: category) }
+
   before do
-    login_user
+    sign_in(user)
   end
 
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      name: "Test Product",
+      description: "Test description",
+      price: 10.00,
+      category_id: category.id,
+      organization_id: organization.id
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      name: nil,
+      description: nil,
+      price: nil,
+      category_id: nil,
+      organization_id: nil
+    }
   }
 
   describe "GET /index" do
@@ -66,7 +83,7 @@ RSpec.describe "/products", type: :request do
 
       it "redirects to the created product" do
         post products_url, params: { product: valid_attributes }
-        expect(response).to redirect_to(product_url(Product.last))
+        expect(response).to redirect_to(products_url)
       end
     end
 
@@ -87,14 +104,24 @@ RSpec.describe "/products", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          name: "Updated Product",
+          description: "Updated description",
+          price: 15.00,
+          category_id: category.id,
+          organization_id: organization.id
+        }
       }
 
       it "updates the requested product" do
         product = Product.create! valid_attributes
         patch product_url(product), params: { product: new_attributes }
         product.reload
-        skip("Add assertions for updated state")
+        expect(product.name).to eq("Updated Product")
+        expect(product.description).to eq("Updated description")
+        expect(product.price).to eq(15.00)
+        expect(product.category_id).to eq(category.id)
+        expect(product.organization_id).to eq(organization.id)
       end
 
       it "redirects to the product" do
