@@ -43,5 +43,7 @@
       ) %>
     <% end %>
   </div>
-  <%== pagy_nav(@pagy) %>
+  <% if @products.count > 5 %>
+    <%== pagy_nav(@pagy) %>
+  <% end %>
 </main>
