@@ -79,4 +79,6 @@ Rails.application.configure do
     # Bullet.rails_logger = true # Escribe en el log de Rails (alternativa)
     # Bullet.add_footer = true # Muestra notificaciones en el navegador
   end
+
+  config.action_mailer.delivery_method = :letter_opener
 end

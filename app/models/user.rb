@@ -4,12 +4,14 @@ class User < ApplicationRecord
   acts_as_tenant(:organization)
 
   enum :role, {
-    super_admin: 0,
-    admin: 1
+    admin: 0,
+    employee: 1
   }
 
   has_many :sessions, dependent: :destroy
   belongs_to :organization
+  has_many :sent_invitations, class_name: "Invitation", foreign_key: "sender_id", dependent: :destroy
+
 
   validates :email_address, presence: true, uniqueness: true, format: {
     with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i,
@@ -26,4 +28,9 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
+
+  def full_name
+    full_names = "#{name} #{last_name}"
+    full_names.capitalize
+  end
 end

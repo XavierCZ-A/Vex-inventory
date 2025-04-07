@@ -1,6 +1,5 @@
 class Stock < ApplicationRecord
   acts_as_tenant(:organization)
-  # before_validation :set_entry_date, on: :create
   after_initialize :set_entry_date, if: :new_record?
 
 

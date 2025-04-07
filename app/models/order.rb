@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   belongs_to :payment_term
   belongs_to :supplier
   has_many :order_items, dependent: :destroy
+  belongs_to :organization
   accepts_nested_attributes_for :order_items, allow_destroy: true, reject_if: :all_blank
 
   enum :status, { pending: 0, shipped: 1, delivered: 2, cancelled: 3 }
@@ -43,17 +44,14 @@ class Order < ApplicationRecord
     self.order_number = "PO-#{year}-#{formatted_sequence}"
   end
 
-    # Método para calcular el subtotal (suma de todos los totales de los items)
     def subtotal
       order_items.sum(&:total_amount)
     end
 
-    # Método para calcular el IVA (asumiendo un 19% en este ejemplo)
     def tax_amount
       subtotal * 0.16
     end
 
-    # Método para calcular el total
     def total
       subtotal + tax_amount
     end

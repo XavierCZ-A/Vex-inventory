@@ -1,0 +1,44 @@
+<div class="email-container">
+  <div class="header">
+    <div class="logo-container">
+      <h1 class="organization-name"><%= @invitation.organization.name %></h1>
+    </div>
+    <div class="divider"></div>
+  </div>
+
+  <div class="content">
+    <h2 class="greeting">
+      Hola <%= @invitation.name %>,
+    </h2>
+
+    <p class="text">
+      Has sido invitado para unirte a 
+      <span class="text-bold"><%= @invitation.organization.name %></span>.
+    </p>
+
+    <p class="text text-last">
+      Haz clic en el botón a continuación para registrarte y comenzar a colaborar con nosotros.
+    </p>
+
+    <div class="button-container">
+      <%= link_to "Register", new_user_url(organization: @invitation.organization_id, token: @invitation.generate_token_for(:invitation)), class: "button" %>
+    </div>
+
+    <p class="link-instruction">
+      Si el botón no funciona, puedes copiar y pegar el siguiente enlace en tu navegador:
+    </p>
+
+    <div class="link-container">{inviteLink}</div>
+
+    <p class="text">
+      Esta invitación expirará en 7 días. Si tienes alguna pregunta, puedes responder directamente a este correo.
+    </p>
+  </div>
+
+  <div class="footer">
+    <p class="copyright">
+      &copy; <%= Date.today.year %> <%= @invitation.organization.name %>. Todos los derechos reservados.
+    </p>
+    <p>Si recibiste este correo por error, por favor ignóralo o elimínalo.</p>
+  </div>
+</div>
