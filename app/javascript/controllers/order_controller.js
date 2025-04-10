@@ -10,15 +10,14 @@ export default class extends Controller {
 
     updatePrice(event) {
         console.log(event)
-        const item = event.target.closest(".order-item"); // Encuentra el contenedor del item actual
+        const item = event.target.closest(".order-item");
         console.log("Item", item);
         const selectedOption = event.target.options[event.target.selectedIndex];
         console.log("Selected option", selectedOption);
         const price = selectedOption.dataset.price || 0;
         console.log("Price", price);
-        item.querySelector("[data-order-target='price']").value = price; // Cambia solo en este item
+        item.querySelector("[data-order-target='price']").value = price;
 
-        // Recalcula el total si ya hay cantidad ingresada
         this.calculateTotal({ target: item.querySelector("[data-order-target='quantity']") });
     }
 

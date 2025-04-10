@@ -15,7 +15,7 @@
           <%= tabler_icon("chevron-left", size: 15) %>
         </button>
       </div>
-      <ul class="space-y-10 p-3">
+      <ul class="space-y-5 p-3">
         <li>
           <%= sidebar_link(text: "Products", path: products_path, icon_name: 'cube') %>
         </li>
@@ -34,16 +34,14 @@
         <li>
           <%= sidebar_link(text: "Invitations", path: invitations_path, icon_name: 'user-plus') if Current.user.admin? %>
         </li>
+        <li>
+          <%= sidebar_link(text: "Employees", path: employees_path, icon_name: 'users-group') if Current.user.admin? %>
+        </li>
       </ul>
     </div>
-    <div class="p-2">
-      <%= link_to session_path(Current.user.id), data: { turbo_method: :delete, turbo_confirm: 'Are you sure' } ,class: "flex items-center space-x-3 text-sm text-white rounded-lg p-3 bg-[#FFA766] hover:bg-[#FF8A33]" do %>
-        <%= tabler_icon('logout', size: '20', color: "#ffffff") %>
-        <span> Logout </span>
-      <% end %>
-    </div>
     <div>
-      <div class="flex items-center space-x-3 text-sm rounded-lg p-3">
+      <hr class="w-full border-[#bfc5d2] mb-3" />
+      <div class="flex items-center space-x-3 text-sm rounded-lg p-2">
         <div class="flex shrink-0 overflow-hidden rounded-lg">
           <%= user_avatar(Current.user.name) %>
         </div>
@@ -51,7 +49,12 @@
           <span class="overflow-ellipsis max-i-full font-semibold"><%= Current.user.full_name %></span>
           <span class="overflow-ellipsis max-i-full text-xs"><%= Current.user.email_address %></span>
         </div>
-        <img class="colorize-black mis-auto" aria-hidden="true" src="/assets/chevrons-up-down-dc468896.svg" width="16" height="16" />
+      </div>
+      <div class="p-1">
+        <%= link_to session_path(Current.user.id), data: { turbo_method: :delete, turbo_confirm: 'Are you sure' }, class: "flex items-center space-x-3 text-sm text-primary rounded-lg p-2" do %>
+          <%= tabler_icon('logout', size: '20', color: "text-primary") %>
+          <span> Logout </span>
+        <% end %>
       </div>
     </div>
   </nav>

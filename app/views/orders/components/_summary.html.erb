@@ -7,7 +7,7 @@
   
   <% dashboard.with_card(
     title: "Gastos $",
-    value: @orders.total_cost,
+    value: @orders.total_cost_all_orders,
     icon: "currency-dollar",
     formatter: :currency,
     color: "green"
@@ -15,7 +15,7 @@
   
   <% dashboard.with_card(
     title: "Pendientes",
-    value: @orders.pending_orders.count,
+    value: @orders.pending.count,
     icon: "clock",
     color: "yellow",
     formatter: :delimiter

@@ -29,6 +29,9 @@ class User < ApplicationRecord
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
+  scope :organization_users, -> { where(organization: Current.organization) }
+  scope :employee, -> { where(role: :employee) }
+
   def full_name
     full_names = "#{name} #{last_name}"
     full_names.capitalize

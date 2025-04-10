@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
   resources :organizations
-  resources :suppliers
+  resources :suppliers do
+    get "purchase_orders", on: :member, to: "suppliers#purchase_orders"
+  end
   resources :stocks, except: :show
   resources :warehouses do
     get "stock", on: :member, to: "stocks#index"
@@ -16,6 +18,7 @@ Rails.application.routes.draw do
   resources :products
   resources :invitations, only: [ :index, :new, :create ]
   resources :homes, only: :index
+  resources :employees, only: [ :index ]
   get "home", to: "homes#index"
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?

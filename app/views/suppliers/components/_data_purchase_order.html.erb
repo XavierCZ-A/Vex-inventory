@@ -1,0 +1,10 @@
+<tr class="bg-white hover:bg-gray-200">
+  <td class="px-6 py-4 "><%= order.order_number %></td>
+  <td class="px-6 py-4 "><%= order.order_date %></td>
+  <td class="px-6 py-4 "><%= number_to_currency(total_amount) %></td>
+  <td class="px-6 py-4 ">
+    <span class="<%= status_order_color(order.status) %> px-2 py-1 rounded-full text-xs">
+      <%= order.status %>
+    </span>
+  </td>
+</tr>

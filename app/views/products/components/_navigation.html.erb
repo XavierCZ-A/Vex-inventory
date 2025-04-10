@@ -10,13 +10,15 @@
       path: products_path(format: :csv),
       text: "Export products",
       icon: "file-type-csv",
-      turbo_frame: "modal"
+      turbo_frame: "modal",
+      variant: :primary
     ) %>
     <%= render Ui::ButtonComponent.new(
       path: new_product_path,
       text: "Add product",
       icon: "plus",
-      turbo_frame: "modal"
+      turbo_frame: "modal",
+      variant: :primary
     ) %>
   </div>
 </nav>

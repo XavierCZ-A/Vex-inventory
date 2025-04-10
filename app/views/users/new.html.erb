@@ -53,6 +53,8 @@
         <%= tabler_icon('eye', size: '20', class: "w-[18px] h-[18px] absolute right-2 cursor-pointer") %>
       </section>
 
+      <%= f.hidden_field :role, value: "employee" %>
+
       <section class="flex items-center">
         <%= f.submit "Sign up", class: "flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
       </section>

@@ -25,6 +25,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    @product.stocks.build
   end
 
   # POST /products or /products.json

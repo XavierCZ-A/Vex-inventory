@@ -14,60 +14,70 @@
 
   <div class="w-full mx-auto">
     <%= form.label :name, "Nombre completo", class: "block text-sm font-medium text-gray-700 mb-1" %>
-    <%= render Ui::InputComponent.new(
-      form: form,
-      attribute: :name,
-      icon: "user",
-      placeholder: "Nombre completo",
-      type: :text
-    ) %>
+    <div class="mt-1 relative rounded-md shadow-sm w-full">
+      <%= render Ui::InputComponent.new(
+        form: form,
+        attribute: :name,
+        icon: "user",
+        placeholder: "Nombre completo",
+        type: :text
+      ) %>
+    </div>
   </div>
 
 
   <div class="flex w-full items-center space-x-2 my-5">
     <div class="w-full">
       <%= form.label :email, class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <%= render Ui::InputComponent.new(
-        form: form,
-        attribute: :email,
-        icon: "mail",
-        placeholder: "Correo electronico",
-        type: :email
-      ) %>
+      <div class="mt-1 relative rounded-md shadow-sm w-full">
+        <%= render Ui::InputComponent.new(
+          form: form,
+          attribute: :email,
+          icon: "mail",
+          placeholder: "Correo electronico",
+          type: :email
+        ) %>
+      </div>
     </div>
 
     <div class="w-full">
       <%= form.label :phone, class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <%= render Ui::InputComponent.new(
-        form: form,
-        attribute: :phone,
-        icon: "phone",
-        placeholder: "+52 XX XXXX XXXX",
-        type: :text
-      ) %>
+      <div class="mt-1 relative rounded-md shadow-sm w-full">
+        <%= render Ui::InputComponent.new(
+          form: form,
+          attribute: :phone,
+          icon: "phone",
+          placeholder: "+52 XX XXXX XXXX",
+          type: :text
+        ) %>
+      </div>
     </div>
   </div>
 
   <div class="w-full mx-auto">
     <%= form.label :company_name, "Empresa (Opcional)", class: "block text-sm font-medium text-gray-700 mb-1" %>
-    <%= render Ui::InputComponent.new(
-      form: form,
-      attribute: :company_name,
-      icon: "building",
-      placeholder: "Nombre de la empresa",
-      type: :text
-    ) %>
+    <div class="mt-1 relative rounded-md shadow-sm w-full">
+      <%= render Ui::InputComponent.new(
+        form: form,
+        attribute: :company_name,
+        icon: "building",
+        placeholder: "Nombre de la empresa",
+        type: :text
+      ) %>
+    </div>
   </div>
 
   <div class="w-full mx-auto my-5">
     <%= form.label :address, "Direccion (Opcional)", class: "block text-sm font-medium text-gray-700 mb-1" %>
-    <%= render Ui::InputComponent.new(
-      form: form,
-      attribute: :address,
-      icon: "map-pin",
-      placeholder: "Direccion",
-      type: :text
-    ) %>
+    <div class="mt-1 relative rounded-md shadow-sm w-full">
+      <%= render Ui::InputComponent.new(
+        form: form,
+        attribute: :address,
+        icon: "map-pin",
+        placeholder: "Direccion",
+        type: :text
+      ) %>
+    </div>
   </div>
 
   <div class="inline">
