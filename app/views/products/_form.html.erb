@@ -11,6 +11,24 @@
     </div>
   <% end %>
 
+  <div class="w-full mx-auto mb-5">
+    <div class="flex items-center space-x-2">
+      <%= form.label :sku, "SKU", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= button_tag type: "button", title: "El SKU es un código único que identifica a cada producto en tu inventario. Ej: CAM-AZL-M: Camisa Azul Mediana" do %>
+        <%= tabler_icon('help', size: '17', class: "text-[#7C5BF3] mb-1") %>
+      <% end %>
+    </div>
+    <div class="mt-1 relative rounded-md shadow-sm w-full">
+      <%= render Ui::InputComponent.new(
+        form: form,
+        attribute: :sku,
+        icon: "file-barcode",
+        placeholder: "Ej: CAM-AZL-M",
+        type: :text
+      ) %>
+    </div>
+  </div>
+
   <div class="w-full mb-5">
     <%= form.fields_for :stocks do |stock_form| %>
       <%= render 'products/components/stock_fields', f: stock_form %>
@@ -19,21 +37,26 @@
 
   <div class="w-full mx-auto">
     <%= form.label :name, class: "block text-sm font-medium text-gray-700 mb-1" %>
-    <%= render Ui::InputComponent.new(
-      form: form,
-      attribute: :name,
-      icon: "package",
-      placeholder: "Nombre del producto",
-      type: :text
-    ) %>
+    <div class="mt-1 relative rounded-md shadow-sm w-full">
+      <%= render Ui::InputComponent.new(
+        form: form,
+        attribute: :name,
+        icon: "package",
+        placeholder: "Nombre del producto",
+        type: :text
+      ) %>
+    </div>
   </div>
 
   <div class="my-8 w-full mx-auto">
     <%= form.label :description, class: "block text-sm font-medium text-gray-700 mb-1" %>
     <div class="mt-1 relative rounded-md shadow-sm w-full">
-      <%= form.textarea :description, rows: 4,
-      placeholder: "Descripcion del producto",
-      class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full focus:ring-indigo-500 focus:border-indigo-500", { "border-gray-400 focus:outline-blue-600": product.errors[:description].none?, "border-red-400 focus:outline-red-600": product.errors[:description].any? }] %>
+      <%= render Ui::TextAreaComponent.new(
+        form: form,
+        attribute: :description,
+        placeholder: "Descripción del producto",
+        rows: 4
+      ) %>
     </div>
   </div>
 
@@ -50,13 +73,15 @@
 
     <div class="w-full">
       <%= form.label :price, "Price ($)", class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <%= render Ui::InputComponent.new(
-        form: form,
-        attribute: :price,
-        icon: "currency-dollar",
-        placeholder: "0.00",
-        type: :number
-      ) %>
+      <div class="mt-1 relative rounded-md shadow-sm w-full">
+        <%= render Ui::InputComponent.new(
+          form: form,
+          attribute: :price,
+          icon: "currency-dollar",
+          placeholder: "0.00",
+          type: :number
+        ) %>
+      </div>
     </div>
   </div>
 

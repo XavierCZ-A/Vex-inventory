@@ -1,5 +1,5 @@
 module OrdersHelper
-  def status_color(status_name)
+  def status_order_color(status_name)
     colors = {
       "pending" => "bg-blue-100 text-blue-800 hover:bg-blue-200",
       "shipped" => "bg-yellow-100 text-yellow-800",

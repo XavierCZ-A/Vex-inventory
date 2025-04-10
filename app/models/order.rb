@@ -16,13 +16,15 @@ class Order < ApplicationRecord
   validates :order_date, presence: true
   validates :payment_term_id, presence: true
 
+  scope :pending, -> { where(status: :pending) }
 
-  def self.total_cost
+
+  def self.total_amount_order
     joins(:order_items).sum("order_items.total_amount")
   end
 
-  def self.pending_orders
-    where(status: :pending)
+  def self.total_cost_all_orders
+    joins(:order_items).sum("order_items.total_amount")
   end
 
   def generate_order_number
@@ -44,15 +46,15 @@ class Order < ApplicationRecord
     self.order_number = "PO-#{year}-#{formatted_sequence}"
   end
 
-    def subtotal
-      order_items.sum(&:total_amount)
-    end
+  def subtotal
+    order_items.sum(&:total_amount)
+  end
 
-    def tax_amount
-      subtotal * 0.16
-    end
+  def tax_amount
+    subtotal * 0.16
+  end
 
-    def total
-      subtotal + tax_amount
-    end
+  def total
+    subtotal + tax_amount
+  end
 end

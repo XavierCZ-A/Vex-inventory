@@ -1,0 +1,18 @@
+<div id="<%= %>" class="w-full sm:w-auto space-y-5">
+    <tr class="bg-white hover:bg-gray-200">
+    <td class="px-6 py-4">
+      <%= user.full_name %>
+    </td>
+    <td class="px-6 py-4">
+      <p class="text-sm font-medium text-gray-900">
+        <%= user.email_address %>
+      </p>
+    </td>
+    <td class="px-6 py-4">
+      <%= user.role %>
+    </td>
+    <td class="px-6 py-4">
+      <%= link_to "Edit", root_path, class: "text-blue-500" %>
+    </td>
+  </tr>
+</div>

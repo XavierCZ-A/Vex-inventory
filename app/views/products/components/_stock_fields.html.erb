@@ -11,12 +11,14 @@
 
     <div class="w-full">
       <%= f.label :quantity, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <div class="mt-1 relative rounded-md shadow-sm w-full">
       <%= render Ui::InputComponent.new(
         form: f,
-        attribute: :quantity,
-        icon: "stack-3",
-        placeholder: "0",
-        type: :number
-      ) %>
+          attribute: :quantity,
+          icon: "stack-3",
+          placeholder: "0",
+          type: :number
+        ) %>
+      </div>
     </div>
   </div>

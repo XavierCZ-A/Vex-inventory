@@ -5,7 +5,7 @@
     <% end %>
   </td>
   <td class="px-6 py-4 whitespace-nowrap w-1/4">
-    <p class="text-sm font-medium text-gray-900"><%= supplier.supplier_phone %></p>
+    <p class="text-sm font-medium text-gray-900"><%= supplier.supplier_name %></p>
   </td>
   <td class="px-6 py-4 whitespace-nowrap w-1/4">
     <p class="text-sm text-[#7C5BF3] hover:text-[#9576F5] font-medium hover:underline transition duration-200 cursor-pointer">
@@ -13,6 +13,13 @@
     </p>
   </td>
   <td class="px-6 py-4 whitespace-nowrap w-1/4">
-    <p class="text-sm font-medium text-gray-900"><%= supplier.supplier_address %></p>
+    <p class="text-sm font-medium text-gray-900"><%= supplier.supplier_phone %></p>
   </td>
+  <td class="whitespace-nowrap w-1/4">
+  <%= link_to purchase_orders_supplier_path(supplier),
+              data: { turbo_frame: "modal" },
+              class: "text-sm font-medium hover:underline transition duration-200 cursor-pointer" do %>
+    <%= tabler_icon('shopping-cart', size: '17', class: "text-[#7C5BF3] mb-1") %>
+  <% end %>
+</td>
 </tr>

@@ -11,7 +11,7 @@ module ApplicationHelper
     inactive_icon_classes = "text-gray-400"
 
     # Clases específicas para estado activo (Asumiendo border-r-4 y añadiendo color de texto)
-    active_link_specific_classes = "font-semibold border-r-4 border-[#7C5BF3] text-[#7C5BF3]" # ¡OJO con border-r-4!
+    active_link_specific_classes = "font-semibold text-[#7C5BF3]" # ¡OJO con border-r-4!
     active_icon_classes = "text-[#7C5BF3]"
 
     # Combina las clases según el estado
