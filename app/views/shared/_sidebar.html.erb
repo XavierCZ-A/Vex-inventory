@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="p-1">
-        <%= link_to session_path(Current.user.id), data: { turbo_method: :delete, turbo_confirm: 'Are you sure' }, class: "flex items-center space-x-3 text-sm text-primary rounded-lg p-2" do %>
+        <%= link_to session_path(Current.user.id), data: { turbo_method: :delete }, class: "flex items-center space-x-3 text-sm text-primary rounded-lg p-2" do %>
           <%= tabler_icon('logout', size: '20', color: "text-primary") %>
           <span> Logout </span>
         <% end %>

@@ -13,6 +13,10 @@
     @apply text-sm text-white bg-primary hover:bg-hover rounded-lg p-2 cursor-pointer;
 }
 
+.button-secondary {
+    @apply text-sm text-black border border-gray-300 hover:bg-gray-100 rounded-lg p-2 cursor-pointer;
+}
+
 .button-danger {
     @apply text-sm text-white bg-red-500 hover:bg-red-600 rounded-lg p-2 cursor-pointer;
 }
