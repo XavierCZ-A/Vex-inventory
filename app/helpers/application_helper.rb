@@ -23,4 +23,14 @@ module ApplicationHelper
       ])
     end
   end
+
+  def display_field_errors(resource, field)
+    return unless resource&.errors&.key?(field)
+
+    error_messages = resource.errors.full_messages_for(field)
+
+    content_tag(:div, data: { controller: "form-errors", form_errors_timeout_value: 3000 }, class: "text-red-500 text-sm rounded-md") do
+      error_messages.first.html_safe
+    end
+  end
 end

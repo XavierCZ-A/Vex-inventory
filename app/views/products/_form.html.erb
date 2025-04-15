@@ -1,23 +1,16 @@
-<%= form_with(model: product, class: "contents flex flex-col items-center w-full", data: { controller: "sizes-fields" }) do |form| %>
-  <% if product.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3 w-80">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
-      <ul class="list-disc ml-6">
-        <% product.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_with(model: product, class: "contents flex flex-col items-center w-full") do |form| %>
 
   <div class="w-full mx-auto mb-5">
-    <div class="flex items-center space-x-2">
+    <div class="flex items-center space-x-1" data-controller="popover" data-action="mouseenter->popover#debouncedShow mouseleave->popover#debouncedHide">
       <%= form.label :sku, "SKU", class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <%= button_tag type: "button", title: "El SKU es un código único que identifica a cada producto en tu inventario. Ej: CAM-AZL-M: Camisa Azul Mediana" do %>
+      <%= button_tag type: "button", class: "btn", aria: { describedby: "library-tooltip" }, data: { popover_target: "button" } do %>
         <%= tabler_icon('help', size: '17', class: "text-primary mb-1") %>
       <% end %>
+      <div popover="hint" id="library-tooltip" class="popover bg-black text-reversed text-xs pb-1 pi-2" data-popover-target="menu" role="tooltip">
+        El SKU es un código único que identifica a cada producto en tu inventario. Ej: CAM-AZL-M: Camisa Azul Mediana
+      </div>
     </div>
+    
     <div class="mt-1 relative rounded-md shadow-sm w-full">
       <%= render Ui::InputComponent.new(
         form: form,
@@ -27,6 +20,7 @@
         type: :text
       ) %>
     </div>
+    <%= display_field_errors(product, :sku) %>
   </div>
 
   <div class="w-full mb-5">
@@ -46,6 +40,7 @@
         type: :text
       ) %>
     </div>
+    <%= display_field_errors(product, :name) %>
   </div>
 
   <div class="my-8 w-full mx-auto">
@@ -67,8 +62,13 @@
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <%= tabler_icon('tag', size: '15', class: "text-primary") %>
         </div>
-        <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a category" }, { id: 'floating_category_id', class: "block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" } %>
+        <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a category" }, 
+        { 
+          id: 'floating_category_id',
+          class: ["block w-full pl-10 pr-3 py-2 border rounded-md", {"border-gray-300 focus:outline-blue-500": product.errors[:category_id].none?, "border-red-400 focus:outline-red-600": product.errors[:category_id].any?}]
+        } %>
       </div>
+      <%= display_field_errors(product, :category_id) %>
     </div>
 
     <div class="w-full">
@@ -82,6 +82,7 @@
           type: :number
         ) %>
       </div>
+      <%= display_field_errors(product, :price) %>
     </div>
   </div>
 
