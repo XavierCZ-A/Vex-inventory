@@ -15,7 +15,7 @@
     <div class="flex items-center space-x-2">
       <%= form.label :sku, "SKU", class: "block text-sm font-medium text-gray-700 mb-1" %>
       <%= button_tag type: "button", title: "El SKU es un código único que identifica a cada producto en tu inventario. Ej: CAM-AZL-M: Camisa Azul Mediana" do %>
-        <%= tabler_icon('help', size: '17', class: "text-[#7C5BF3] mb-1") %>
+        <%= tabler_icon('help', size: '17', class: "text-primary mb-1") %>
       <% end %>
     </div>
     <div class="mt-1 relative rounded-md shadow-sm w-full">
@@ -65,7 +65,7 @@
       <%= form.label :category_id, for: 'floating_category_id', class: "block text-sm font-medium text-gray-700 mb-1" %>
       <div class="mt-1 relative rounded-md shadow-sm w-full">
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <%= tabler_icon('tag', size: '15', class: "text-[#7C5BF3]") %>
+          <%= tabler_icon('tag', size: '15', class: "text-primary") %>
         </div>
         <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a category" }, { id: 'floating_category_id', class: "block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" } %>
       </div>
@@ -86,6 +86,6 @@
   </div>
 
   <div class="mt-4 ml-auto">
-    <%= form.submit class: "flex items-center text-white bg-[#7C5BF3] hover:bg-[#9576F5] rounded-lg p-3" %>
+    <%= form.submit class: "button" %>
   </div>
 <% end %>

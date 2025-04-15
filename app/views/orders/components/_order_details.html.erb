@@ -2,38 +2,38 @@
   <div class="md:col-span-2 rounded-lg border border-gray-200 overflow-hidden">
     <div class="flex flex-row items-center justify-between p-4 pb-2">
       <h2 class="text-xl font-semibold">Purchase details</h2>
-      <span class="<%= status_color(@order.status) %> flex items-center px-2 py-1 rounded-full text-xs">
+      <span class="<%= status_order_color(order.status) %> flex items-center px-2 py-1 rounded-full text-xs">
         <%= tabler_icon("truck", size: 15, class: "mr-1") %>
-        <%= @order.status %>
+        <%= order.status %>
       </span>
     </div>
     <div class="p-4">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <h3 class="font-semibold text-sm text-gray-500 mb-1">Número de Orden</h3>
-          <p><%= @order.order_number %></p>
+          <p><%= order.order_number %></p>
         </div>
         <div>
           <h3 class="font-semibold text-sm text-gray-500 mb-1">Terminos de pago</h3>
-          <p><%= @order.payment_term.name %></p>
+          <p><%= order.payment_term.name %></p>
         </div>
         <div class="flex items-start gap-2">
           <%= tabler_icon('calendar', size: '20', class: "text-gray-500") %>
           <div>
             <h3 class="font-semibold text-sm text-gray-500 mb-1">Fecha de Orden</h3>
-            <p><%= @order.order_date %></p>
+            <p><%= order.order_date %></p>
           </div>
         </div>
         <div class="flex items-start gap-2">
           <%= tabler_icon('truck', size: '20', class: "text-gray-500") %>
           <div>
             <h3 class="font-semibold text-sm text-gray-500 mb-1">Fecha de Entrega</h3>
-            <p><%= @order.delivery_date %></p>
+            <p><%= order.delivery_date %></p>
           </div>
         </div>
         <div class="md:col-span-2">
           <h3 class="font-semibold text-sm text-gray-500 mb-1">Notas</h3>
-          <p class="text-sm"> <%= @order.notes %></p>
+          <p class="text-sm"> <%= order.notes %></p>
         </div>
       </div>
     </div>
@@ -48,30 +48,29 @@
         <%= tabler_icon('user', size: '20', class: "text-gray-500") %>
         <div>
           <h3 class="font-semibold text-sm text-gray-500 mb-1">Nombre</h3>
-          <p><%= @supplier.company_name %></p>
+          <p><%= supplier.company_name %></p>
         </div>
       </div>
       <div class="flex items-start gap-2">
         <%= tabler_icon('mail', size: '20', class: "text-gray-500") %>
         <div>
           <h3 class="font-semibold text-sm text-gray-500 mb-1">Contacto</h3>
-          <!--              Falta agregar los campos de contacto del proveedor-->
-          <p> <%= @supplier.supplier_name %></p>
-          <p class="text-sm"> <%= @supplier.supplier_email %> </p>
+          <p> <%= supplier.supplier_name %></p>
+          <p class="text-sm"> <%= supplier.supplier_email %> </p>
         </div>
       </div>
       <div class="flex items-start gap-2">
         <%= tabler_icon('phone', size: '20', class: "text-gray-500") %>
         <div>
           <h3 class="font-semibold text-sm text-gray-500 mb-1">Teléfono</h3>
-          <p><%= @supplier.supplier_phone %></p>
+          <p><%= supplier.supplier_phone %></p>
         </div>
       </div>
       <div class="flex items-start gap-2">
         <%= tabler_icon('map-pin', size: '20', class: "text-gray-500") %>
         <div>
           <h3 class="font-semibold text-sm text-gray-500 mb-1">Dirección</h3>
-          <p class="text-sm"><%= @supplier.supplier_address %></p>
+          <p class="text-sm"><%= supplier.supplier_address %></p>
         </div>
       </div>
     </div>

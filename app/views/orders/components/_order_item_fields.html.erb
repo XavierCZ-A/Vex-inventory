@@ -6,7 +6,7 @@
     <%= f.label :product_id, class: "block text-sm font-medium text-gray-700 mb-1" %>
     <div class="mt-1 relative rounded-md shadow-sm">
       <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <%= tabler_icon('box', size: '15', class: "text-[#7C5BF3]") %>
+        <%= tabler_icon('box', size: '15', class: "text-primary") %>
       </div>
       <%= f.select :product_id, options_for_select(@products.present? ? @products.map { |p| [p.name, p.id, { data: { price: p.price } }] } : []),
                    { prompt: "Select a product" },

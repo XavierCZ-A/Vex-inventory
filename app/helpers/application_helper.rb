@@ -3,18 +3,14 @@ module ApplicationHelper
   def sidebar_link(text:, path:, icon_name:)
     is_active = current_page?(path)
 
-    # Clases base comunes para todos los enlaces
-    base_link_classes = "flex items-center space-x-3 text-sm rounded-sm p-2"
+    base_link_classes = "flex items-center space-x-3 text-base rounded-sm p-3"
 
-    # Clases específicas para estado inactivo
-    inactive_link_specific_classes = "text-gray-400 hover:bg-gray-200 hover:rounded-lg"
+    inactive_link_specific_classes = "text-gray-400 hover:bg-gray-100 hover:rounded-lg"
     inactive_icon_classes = "text-gray-400"
 
-    # Clases específicas para estado activo (Asumiendo border-r-4 y añadiendo color de texto)
-    active_link_specific_classes = "font-semibold text-[#7C5BF3]" # ¡OJO con border-r-4!
-    active_icon_classes = "text-[#7C5BF3]"
+    active_link_specific_classes = "font-semibold bg-gray-200 p-3 rounded-lg"
+    active_icon_classes = "text-black"
 
-    # Combina las clases según el estado
     link_classes = is_active ? "#{base_link_classes} #{active_link_specific_classes}" : "#{base_link_classes} #{inactive_link_specific_classes}"
     icon_classes = is_active ? active_icon_classes : inactive_icon_classes
 

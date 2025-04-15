@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users, only: [ :create, :new ]
   resource :session
   resources :passwords, param: :token
-  resources :organizations
+  resources :organizations, only: [ :create, :new ]
   resources :suppliers do
     get "purchase_orders", on: :member, to: "suppliers#purchase_orders"
   end

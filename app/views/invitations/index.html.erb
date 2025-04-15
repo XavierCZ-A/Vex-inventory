@@ -32,12 +32,12 @@
       </section>
     <% else %>
       <%= render Shared::EmptyStateComponent.new(
-        title: "There are no customers",
-        description: "This provider has no customers added. Do you want to add one now?",
-        icon: "users-group",
+        title: "There are no invitations",
+        description: "This provider has no invitations added. Do you want to invite one now?",
+        icon: "user-plus",
         icon_button: "plus",
         path: new_invitation_path,
-        text: "Add invitation",
+        text: "Invite employee",
         turbo_frame: "modal"
       ) %>
     <% end %>

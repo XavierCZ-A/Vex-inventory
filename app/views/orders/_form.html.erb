@@ -6,7 +6,7 @@
         <%= form.label :payment_term_id, for: 'floating_supplier_id', class: "block text-sm font-medium text-gray-700 mb-1" %>
         <div class="mt-1 relative rounded-md shadow-sm">
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <%= tabler_icon('receipt-dollar', size: '15', class: "text-[#7C5BF3]") %>
+            <%= tabler_icon('receipt-dollar', size: '15', class: "text-primary") %>
           </div>
           <%= form.collection_select :payment_term_id, PaymentTerm.active, :id, :name, { prompt: "Select a payments" }, { id: 'floating_payment_term_id', class: "block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" } %>
         </div>
@@ -22,7 +22,7 @@
         <%= form.label :supplier_id, for: 'floating_supplier_id', class: "block text-sm font-medium text-gray-700 mb-1" %>
         <div class="mt-1 relative rounded-md shadow-sm">
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <%= tabler_icon('tag', size: '15', class: "text-[#7C5BF3]") %>
+            <%= tabler_icon('tag', size: '15', class: "text-primary") %>
           </div>
           <%= form.collection_select :supplier_id, Supplier.all, :id, :company_name, { prompt: "Select a supplier" }, { id: 'floating_supplier_id', class: "block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" } %>
         </div>
