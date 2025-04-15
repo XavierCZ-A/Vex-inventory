@@ -14,6 +14,7 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :stocks, allow_destroy: true, reject_if: :all_blank
 
   # Validators
+  validates :sku, presence: true, uniqueness: { scope: :organization_id }
   validates :name, presence: true, format: {
     with: /\A[a-zA-Z0-9 ]+\z/,
     message: :invalid

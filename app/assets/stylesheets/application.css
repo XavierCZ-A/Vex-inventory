@@ -195,3 +195,64 @@
   .copyright {
     margin-bottom: 0.5rem;
   }
+
+  .popover {
+    /* === Estilos Base === */
+    background-color: var(--color-bg, white); /* Añadido fallback por si la variable no está definida */
+    color: var(--color-text, #333);          /* Añadido fallback */
+    border-radius: var(--rounded-md, 0.5rem);
+    border-width: var(--border, 1px);
+    border-style: solid; /* Asegúrate de definir el estilo del borde */
+    border-color: var(--color-border, #e0e0e0); /* Define el color del borde */
+    box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)); /* Sombra un poco más pronunciada (lg) como ejemplo */
+    padding: var(--space-md, 1rem); /* Añadido padding interno */
+    inline-size: var(--popover-size, max-content); /* Tamaño en línea */
+    max-inline-size: var(--popover-max-width, 300px); /* Ancho máximo para evitar que sea demasiado grande */
+    overflow: hidden; /* Asegura que el contenido no se desborde durante la animación */
+    z-index: var(--z-popover, 1000); /* Asegurar que esté por encima de otros elementos */
+  
+    /* === Configuración de Transición === */
+    transition-behavior: allow-discrete;
+    transition-property: opacity, transform, display, overlay; /* display y overlay para compatibilidad popover */
+    transition-duration: var(--time-200, 200ms); /* Duración un poco más suave */
+    transition-timing-function: var(--ease-out-cubic, cubic-bezier(0.33, 1, 0.68, 1)); /* Easing para suavizar la salida */
+  
+    /* === Estado Oculto / Transición de Salida (hacia este estado) === */
+    opacity: 0;
+    transform: var(--popover-transform-exit, scale(0.95) translateY(-5px)); /* Escala y ligera traslación */
+    pointer-events: none; /* Desactivar interacciones cuando está oculto */
+  
+    /* === Estado Visible / Abierto === */
+    &:popover-open {
+      opacity: 1;
+      transform: var(--popover-transform-enter, scale(1) translateY(0));
+      pointer-events: auto; /* Reactivar interacciones */
+      /* Puedes añadir un easing específico para la entrada si quieres que sea diferente */
+      /* transition-timing-function: var(--ease-in-..., ...); */
+    }
+  
+    /* === Estado Inicial para Animación de Entrada === */
+    @starting-style {
+      &:popover-open {
+        opacity: 0;
+        transform: var(--popover-transform-exit, scale(0.95) translateY(-5px)); /* Debe coincidir con el estado oculto */
+      }
+    }
+  }
+  
+  .fade-out-error {
+    opacity: 0;
+    /* ¡Añade la transición aquí si no está en el elemento base! */
+    transition: opacity 0.5s ease-out; /* Transiciona la opacidad durante 0.5 segundos */
+  
+    /* Opcional: Animar también la altura/márgenes para un colapso más suave */
+    /* transition: opacity 0.5s ease-out, height 0.5s ease-out, margin 0.5s ease-out, padding 0.5s ease-out; */
+    /* overflow: hidden; */ /* Necesario para animar altura */
+    /* Podrías necesitar establecer height, margin, padding a 0 aquí también */
+    /* height: 0; */
+    /* margin-top: 0; */
+    /* margin-bottom: 0; */
+    /* padding-top: 0; */
+    /* padding-bottom: 0; */
+    /* border-width: 0; */ /* Si tiene borde */
+  }
