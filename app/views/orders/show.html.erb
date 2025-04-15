@@ -2,9 +2,9 @@
 
 <div class="w-full p-4 md:p-6 overflow-y-auto scrollbar-hide">
   <div class="flex flex-col gap-6">
-    <%= render "orders/components/order_header_details"%>
-    <%= render "orders/components/order_details"%>
-    <%= render "orders/components/delivery_details"%>
-    <%= render "orders/components/product_details"%>
+    <%= render "orders/components/order_header_details", order: @order%>
+    <%= render "orders/components/order_details", order: @order, supplier: @supplier%>
+    <%= render "orders/components/delivery_details", order: @order%>
+    <%= render "orders/components/product_details", order: @order%>
   </div>
 </div>

@@ -21,9 +21,11 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
     if @organization.save
-      ActsAsTenant.current_tenant = @organization
-      redirect_to @organization, notice: "Organization was successfully created."
+      # ActsAsTenant.current_tenant = @organization
+      start_new_session_for(@organization.users.last)
+      redirect_to root_path, notice: "Organization was successfully created."
     else
+      flash.now[:alert] = "Error, there are missing fields "
       render :new, status: :unprocessable_entity
     end
   end
@@ -49,10 +51,6 @@ class OrganizationsController < ApplicationController
       @organization = Organization.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
-    # def organization_params
-    #   params.expect(organization: [ :name, users_attributes: [ :name, :last_name, :email_address, :password, :role ] ])
-    # end
     def organization_params
       params.require(:organization).permit(:name, users_attributes: [ :name, :last_name, :email_address, :password, :role ])
     end

@@ -12,8 +12,8 @@
     <% end %>
   </div>
   <hr class="w-full border-[#E5E7EB] mt-3 mb-5" />
-  <div id="orders" class="overflow-hidden p-2 rounded-lg border border-gray-200 shadow">
-    <% if @users.any? %>
+  <% if @users.any? %>
+    <div id="orders" class="overflow-hidden p-2 rounded-lg border border-gray-200 shadow">
       <section class="relative overflow-x-auto">
         <table class="min-w-full bg-white">
           <thead>
@@ -31,15 +31,15 @@
           </tbody>
         </table>
       </section>
-    <% else %>
-      <%= render Shared::EmptyStateComponent.new(
-        title: "There are no orders",
-        description: "This provider has no orders added. Do you want to add one now?",
-        icon: "clipboard-check",
-        icon_button: "plus",
-        path: new_order_path,
-        text: "Create order"
-      ) %>
-    <% end %>
-  </div>
+    </div>
+  <% else %>
+    <%= render Shared::EmptyStateComponent.new(
+      title: "There are no employees",
+      description: "This provider has no employees added. Do you want to invite one now?",
+      icon: "users-group",
+      icon_button: "plus",
+      path: invitations_path,
+      text: "Invite employee"
+    ) %>
+  <% end %>
 </div>

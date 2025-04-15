@@ -47,9 +47,9 @@
 }
 
 .pagy a:hover {
-    background-color: #7C5BF3;
+    background-color: #cccccc;
     color: white;
-    border-color: #7C5BF3;
+    border-color: #cccccc;
 }
 
 .pagy a:focus {
@@ -74,15 +74,15 @@
 }
 
 .pagy .current {
-    background-color: #7C5BF3;
-    color: white;
-    border-color: #7C5BF3;
+    background-color: #ffffff;
+    color: black;
+    border-color: #8a8a8a;
     font-weight: bold;
 }
 
 .pagy .current:hover {
-    background-color: #9576F5;
-    border-color: #9576F5;
+    background-color: #cccccc;
+    border-color: #cccccc;
 }
 
 .email-container {
@@ -92,7 +92,6 @@
     background-color: #ffffff;
   }
   
-  /* Encabezado */
   .header {
     margin-bottom: 2rem;
     text-align: center;
@@ -149,7 +148,6 @@
     margin-bottom: 1.5rem;
   }
   
-  /* Botón y enlace */
   .button-container {
     text-align: center;
     margin-bottom: 1.5rem;
@@ -186,7 +184,6 @@
     margin-bottom: 1.5rem;
   }
   
-  /* Pie de página */
   .footer {
     padding-top: 1.5rem;
     border-top: 1px solid #e5e7eb;
