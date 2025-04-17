@@ -11,6 +11,14 @@ class ProductsController < ApplicationController
       format.html
       format.csv { send_data Product.to_csv, filename: "products-#{DateTime.now.strftime("%d%m%Y%H%M")}.csv" }
     end
+
+    if params[:query_text].present?
+      @products = Product.search_full_text(params[:query_text])
+    end
+
+    if params[:category_id].present?
+      @products = @products.where(category_id: params[:category_id])
+    end
   end
 
   # GET /products/1 or /products/1.json
@@ -34,6 +42,7 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to products_path, notice: "Product was successfully created."
     else
+      @product.stocks.build
       render :new, status: :unprocessable_entity
     end
   end
@@ -65,7 +74,7 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      params.require(:product).permit(:name, :description, :price, :category_id,
+      params.require(:product).permit(:name, :description, :price, :category_id, :sku,
       stocks_attributes: [ :id, :warehouse_id, :quantity, :_destroy ])
     end
 end

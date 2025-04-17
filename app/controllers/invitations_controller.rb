@@ -1,6 +1,7 @@
 class InvitationsController < ApplicationController
   def index
     @invitations = Invitation.includes(:organization)
+    authorize @invitations
   end
 
   def new

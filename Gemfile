@@ -78,3 +78,7 @@ gem "acts_as_tenant"
 gem "view_component"
 gem "letter_opener", group: :development
 gem "letter_opener_web", group: :development
+
+gem "pundit", "~> 2.5"
+gem 'pg_search'
+

@@ -1,20 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-    --color-primary: #7C5BF3;
-    --color-hover: #9576F5;
+    --color-primary: #1b69d8;
+    --color-hover: #2073ec;
 }
 
 .principal-button {
-    @apply flex items-center text-sm text-white bg-primary hover:bg-hover rounded-lg p-2;
+    @apply flex items-center text-sm text-white bg-primary hover:bg-hover rounded-lg p-2 cursor-pointer;
 }
 
 .button {
-    @apply text-sm text-white bg-primary hover:bg-hover rounded-lg p-2;
+    @apply text-sm text-white bg-primary hover:bg-hover rounded-lg p-2 cursor-pointer;
+}
+
+.button-secondary {
+    @apply text-sm text-black border border-gray-300 hover:bg-gray-100 rounded-lg p-2 cursor-pointer;
 }
 
 .button-danger {
-    @apply text-sm text-white bg-red-500 hover:bg-red-600 rounded-lg p-2;
+    @apply text-sm text-white bg-red-500 hover:bg-red-600 rounded-lg p-2 cursor-pointer;
 }
 
 .summary-card {
