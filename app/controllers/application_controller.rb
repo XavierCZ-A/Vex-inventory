@@ -24,7 +24,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-    # --- Tu manejador de errores de Pundit ---
     def user_not_authorized(exception)
       flash[:alert] = "No tienes permiso para realizar esta acción."
       redirect_back(fallback_location: root_path)
