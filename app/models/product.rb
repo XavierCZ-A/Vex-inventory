@@ -1,6 +1,7 @@
 require "csv"
 
 class Product < ApplicationRecord
+  include PgSearch::Model
   acts_as_tenant(:organization)
 
   # Associations
@@ -24,6 +25,15 @@ class Product < ApplicationRecord
 
   scope :total_products_price, -> { sum(:price) }
   scope :order_by_date, -> { order(created_at: :desc) }
+
+  pg_search_scope :search_full_text,
+    against: [ :name, :sku ],
+    associated_against: {
+      category: :name
+    },
+    using: {
+      tsearch: { prefix: true }
+    }
 
   def self.with_zero_stock
     joins(:stocks).where(stocks: { quantity: 0 }).distinct

@@ -11,6 +11,14 @@ class ProductsController < ApplicationController
       format.html
       format.csv { send_data Product.to_csv, filename: "products-#{DateTime.now.strftime("%d%m%Y%H%M")}.csv" }
     end
+
+    if params[:query_text].present?
+      @products = Product.search_full_text(params[:query_text])
+    end
+
+    if params[:category_id].present?
+      @products = @products.where(category_id: params[:category_id])
+    end
   end
 
   # GET /products/1 or /products/1.json
