@@ -1,23 +1,26 @@
 <div id="<%= dom_id stock %>" class="w-full sm:w-auto space-y-5">
-  <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-    <div class="overflow-x-auto">
-      <tr class="border-t border-gray-200">
-        <td class="py-3 px-6">
-          <div class="flex items-center">
-            <%= tabler_icon("package", size: "20", class: "text-[#7C5BF3] mr-2") %>
+      <tr class="bg-white hover:bg-gray-200">
+        <td class="px-6 py-4">
+          <p class="text-sm font-medium text-gray-900">
             <%= stock.product.name %>
-          </div>
+          </p>
         </td>
-        <td class="py-3 px-6"><%= stock.product.category.name %></td>
-        <td class="py-3 px-6"><%= number_to_currency(stock.product.price) %></td>
-        <td class="py-3 px-6">
+        <td class="px-6 py-4">
+          <span class="<%= category_color(stock.product.category.name) %> px-2 py-1 rounded-full text-xs">
+            <%= stock.product.category.name %>
+          </span>
+        </td>
+        <td class="px-6 py-4">
+          <p class="text-sm font-medium text-gray-900">
+            <%= number_to_currency(stock.product.price) %>
+          </p>
+        </td>
+        <td class="px-6 py-4">
           <div class="flex items-center">
-                    <span class="font-medium">
+                    <p class="text-sm font-medium text-gray-900">
                       <%= stock.quantity %>
-                    </span>
+                    </p>
           </div>
         </td>
       </tr>
-    </div>
-  </div>
 </div>

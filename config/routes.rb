@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   end
   resources :categories, only: [ :index, :new, :create ]
   resources :products
-  resources :invitations, only: [ :index, :new, :create ]
+  resources :invitations, only: [ :index, :new, :create ] do
+    post :resend, on: :member
+  end
   resources :homes, only: :index
   resources :employees, only: [ :index ]
   get "home", to: "homes#index"

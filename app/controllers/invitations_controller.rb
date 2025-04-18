@@ -1,11 +1,12 @@
 class InvitationsController < ApplicationController
   def index
-    @invitations = Invitation.includes(:organization)
+    @invitations = Invitation.all
     authorize @invitations
   end
 
   def new
     @invitation = Invitation.new
+    authorize @invitation
   end
 
   def create
@@ -16,6 +17,12 @@ class InvitationsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def resend
+    @invitation = Invitation.find(params[:id])
+    InvitationsMailer.invite(@invitation).deliver_later
+    redirect_to invitations_path, notice: "Invitation resent successfully."
   end
 
   private

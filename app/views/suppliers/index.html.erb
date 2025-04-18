@@ -1,20 +1,10 @@
 <% content_for :title, "Suppliers" %>
 <div class="w-full mx-auto p-3">
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Suppliers</h1>
-    <% if @suppliers.any? %>
-      <%= render Ui::ButtonComponent.new(
-        path: new_supplier_path,
-        text: "Add supplier",
-        icon: "plus",
-        turbo_frame: "modal"
-      ) %>
-    <% end %>
-  </div>
+  <%= render "suppliers/components/navigation" %>
   <hr class="w-full border-[#E5E7EB] mt-3 mb-5" />
   <div id="purchase_orders" class="min-w-full">
     <% if @suppliers.any? %>
-      <section class="overflow-hidden p-2 rounded-lg border border-gray-200 shadow">
+      <section class="overflow-hidden p-2 rounded-lg border bg-white border-gray-200 shadow">
         <table class="min-w-full divide-y divide-gray-200">
           <thead>
             <tr class="border-b border-[#E5E7EB]">

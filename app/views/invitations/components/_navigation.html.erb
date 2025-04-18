@@ -1,0 +1,18 @@
+<nav class="flex items-center mb-6">
+  <h1 class="text-2xl font-extrabold text-gray-800">
+    Invitations
+    <span class="block text-sm font-medium text-gray-500 mt-1">
+        Manage your team's access to the platform    
+    </span>
+  </h1>
+  <div class="flex items-center space-x-2 ml-auto">
+    <%= render Ui::ButtonComponent.new(
+      path: new_invitation_path,
+      text: "Add invitation",
+      icon: "plus",
+      turbo_frame: "modal",
+      variant: :primary
+    ) %>
+  </div>
+</nav>
+
