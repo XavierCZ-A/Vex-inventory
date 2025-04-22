@@ -1,27 +1,25 @@
+# spec/policies/invitation_policy_spec.rb
 require 'rails_helper'
 
+# Describe la clase de la policy que estás probando
 RSpec.describe InvitationPolicy, type: :policy do
-  let(:user) { User.new }
+  let(:record) { nil }
 
-  subject { described_class }
+  subject { described_class.new(user, record) }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'as a non admin user' do
+    let(:user) { create(:user, :employee) }
+
+    it { is_expected.to forbid_action(:index) }
+    it { is_expected.to forbid_action(:new) }
+    it { is_expected.to forbid_action(:create) }
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  context 'as an admin user' do
+    let(:user) { create(:user, :admin) }
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it { is_expected.to permit_action(:index) }
+    it { is_expected.to permit_action(:new) }
+    it { is_expected.to permit_action(:create) }
   end
 end

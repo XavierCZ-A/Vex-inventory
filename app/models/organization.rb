@@ -6,6 +6,7 @@ class Organization < ApplicationRecord
   has_many :warehouses, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :suppliers, dependent: :destroy
+  has_many :stock_movements, dependent: :destroy
 
   accepts_nested_attributes_for :users
 
@@ -13,4 +14,6 @@ class Organization < ApplicationRecord
     with: /\A[a-zA-Z0-9\s]+\z/,
     message: :invalid
   }
+
+  normalizes :name, with: ->(n) { n.strip.capitalize }
 end

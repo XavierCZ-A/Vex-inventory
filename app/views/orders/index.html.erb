@@ -1,21 +1,12 @@
 <% content_for :title, "Orders" %>
 <div class="w-full mx-auto p-3">
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Orders</h1>
-    <% if @orders.any? %>
-      <%= render Ui::ButtonComponent.new(
-        path: new_order_path,
-        text: "Create order",
-        icon: "plus",
-      ) %>
-    <% end %>
-  </div>
+  <%= render "orders/components/navigation" %>
   <hr class="w-full border-[#E5E7EB] mt-3 mb-5" />
   <%= render "orders/components/summary" %>
   <% if @orders.any? %>
-    <div id="orders" class="overflow-hidden p-2 rounded-lg border border-gray-200 shadow">
+    <div id="orders" class="overflow-hidden p-2 rounded-lg border bg-white border-gray-200 shadow">
       <section class="relative overflow-x-auto">
-        <table class="min-w-full bg-white">
+        <table class="min-w-full">
           <thead>
             <tr class="border-b border-[#E5E7EB]">
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order number</th>

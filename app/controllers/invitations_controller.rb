@@ -1,15 +1,17 @@
 class InvitationsController < ApplicationController
   def index
-    @invitations = Invitation.includes(:organization)
+    @invitations = Invitation.all
     authorize @invitations
   end
 
   def new
     @invitation = Invitation.new
+    authorize @invitation
   end
 
   def create
     @invitation = Invitation.new(invitation_params)
+    authorize @invitation
     if @invitation.save
       InvitationsMailer.invite(@invitation).deliver_later
       redirect_to invitations_path, notice: "Invitation sent successfully."
@@ -18,9 +20,15 @@ class InvitationsController < ApplicationController
     end
   end
 
+  def resend
+    @invitation = Invitation.find(params[:id])
+    InvitationsMailer.invite(@invitation).deliver_later
+    redirect_to invitations_path, notice: "Invitation resent successfully."
+  end
+
   private
 
   def invitation_params
-    params.expect(invitation: [ :email, :name ])
+    params.require(:invitation).permit(:email, :name)
   end
 end

@@ -10,6 +10,7 @@ RSpec.describe Order, type: :model do
     it { should belong_to(:supplier) }
     it { should belong_to(:payment_term) }
     it { should have_many(:order_items).dependent(:destroy) }
+    it { should belong_to(:organization) }
   end
 
   describe 'validations' do
@@ -18,6 +19,20 @@ RSpec.describe Order, type: :model do
     it { should validate_presence_of(:order_date) }
     it { should validate_presence_of(:payment_term_id) }
     it { should define_enum_for(:status).with_values([ :pending, :shipped, :delivered, :cancelled ]) }
+  end
+
+  describe 'nested attributes' do
+    it { should accept_nested_attributes_for(:order_items).allow_destroy(true) }
+  end
+
+  describe 'pending scope' do
+    it 'returns only pending orders' do
+      order1 = create(:order, status: :pending, organization: organization)
+      order2 = create(:order, status: :shipped, organization: organization)
+
+      expect(Order.pending).to eq([ order1 ])
+      expect(Order.pending).not_to include(order2)
+    end
   end
 
   describe '#generate_order_number' do

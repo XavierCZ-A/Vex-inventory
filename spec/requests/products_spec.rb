@@ -28,7 +28,8 @@ RSpec.describe "/products", type: :request do
       description: "Test description",
       price: 10.00,
       category_id: category.id,
-      organization_id: organization.id
+      organization_id: organization.id,
+      sku: "CAM-001"
     }
   }
 
@@ -38,7 +39,8 @@ RSpec.describe "/products", type: :request do
       description: nil,
       price: nil,
       category_id: nil,
-      organization_id: nil
+      organization_id: nil,
+      sku: nil
     }
   }
 

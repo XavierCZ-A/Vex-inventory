@@ -1,27 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe EmployeePolicy, type: :policy do
-  let(:user) { User.new }
+  let(:record) { nil }
 
-  subject { described_class }
+  subject { described_class.new(user, record) }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'as an employee' do
+    let(:user) { create(:user, :employee) }
+
+    it { is_expected.to forbid_action(:index) }
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  context 'as an admin' do
+    let(:user) { create(:user, :admin) }
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it { is_expected.to permit_action(:index) }
   end
 end

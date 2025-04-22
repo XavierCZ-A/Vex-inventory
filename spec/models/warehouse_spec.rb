@@ -1,8 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Warehouse, type: :model do
-  let(:organization) { create(:organization) } # Usando FactoryBot para crear una organización
-  let(:warehouse) { create(:warehouse, organization: organization) } # Usando FactoryBot para crear un warehouse
+  let(:organization) { create(:organization) }
+  let(:user) { create(:user, organization: organization) }
+  let(:session) { create(:session, user: user) }
+  let(:warehouse) { create(:warehouse, organization: organization) }
+
+  before do
+    Current.session = session
+  end
 
   describe 'associations' do
     it { should have_many(:stocks) }

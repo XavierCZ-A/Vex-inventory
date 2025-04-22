@@ -1,0 +1,17 @@
+<nav class="flex items-center mb-6">
+  <h1 class="text-2xl font-extrabold text-gray-800">
+    Orders
+    <span class="block text-sm font-medium text-gray-500 mt-1">
+      Manage your orders to suppliers
+    </span>
+  </h1>
+  <div class="flex items-center space-x-2 ml-auto">
+    <%= render Ui::ButtonComponent.new(
+      path: new_order_path,
+      text: "Add order",
+      icon: "plus",
+      variant: :primary
+    ) %>
+  </div>
+</nav>
+

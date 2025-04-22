@@ -2,9 +2,15 @@ require 'rails_helper'
 
 RSpec.describe Stock, type: :model do
   let(:organization) { create(:organization) }
+  let(:user) { create(:user, organization: organization) }
+  let(:session) { create(:session, user: user) }
   let(:product) { create(:product, organization: organization) }
   let(:warehouse) { create(:warehouse, organization: organization) }
   let(:stock) { create(:stock, product: product, warehouse: warehouse, organization: organization) }
+
+  before do
+    Current.session = session
+  end
 
   describe 'associations' do
     it { should belong_to(:product).optional }
@@ -27,6 +33,31 @@ RSpec.describe Stock, type: :model do
         create(:stock, quantity: 20, product: product, warehouse: warehouse, organization: organization)
         expect(Stock.total_stock).to eq(30)
       end
+    end
+  end
+
+  describe 'callbacks' do
+    it 'creates an initial stock movement after create' do
+      expect {
+        create(:stock, quantity: 5, product: product, warehouse: warehouse, organization: organization)
+      }.to change(StockMovement, :count).by(1)
+
+      movement = StockMovement.last
+      expect(movement.movement_type).to eq('initial')
+      expect(movement.quantity_change).to eq(5)
+      expect(movement.user).to eq(user)
+    end
+
+    it 'creates an adjustment stock movement after update' do
+       stock_instance = create(:stock, quantity: 10, product: product, warehouse: warehouse, organization: organization)
+       expect {
+         stock_instance.update(quantity: 15)
+        }.to change(StockMovement, :count).by(1)
+
+      movement = StockMovement.last
+      expect(movement.movement_type).to eq('adjustment')
+      expect(movement.quantity_change).to eq(5)
+      expect(movement.user).to eq(user)
     end
   end
 end

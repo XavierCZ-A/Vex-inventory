@@ -18,11 +18,6 @@ class Order < ApplicationRecord
 
   scope :pending, -> { where(status: :pending) }
 
-
-  def self.total_amount_order
-    joins(:order_items).sum("order_items.total_amount")
-  end
-
   def self.total_cost_all_orders
     joins(:order_items).sum("order_items.total_amount")
   end
@@ -46,15 +41,15 @@ class Order < ApplicationRecord
     self.order_number = "PO-#{year}-#{formatted_sequence}"
   end
 
-  def subtotal
+  def total_amount_order
     order_items.sum(&:total_amount)
   end
 
   def tax_amount
-    subtotal * 0.16
+    total_amount_order * 0.16
   end
 
   def total
-    subtotal + tax_amount
+    total_amount_order + tax_amount
   end
 end

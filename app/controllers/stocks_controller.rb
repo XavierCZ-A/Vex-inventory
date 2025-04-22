@@ -33,7 +33,7 @@ class StocksController < ApplicationController
   # PATCH/PUT /stocks/1 or /stocks/1.json
   def update
     if @stock.update(stock_params)
-      redirect_to @stock, notice: "Stock was successfully updated."
+      redirect_to products_path, notice: "Stock was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end

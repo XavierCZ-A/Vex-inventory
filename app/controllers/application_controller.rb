@@ -24,8 +24,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-    def user_not_authorized(exception)
-      flash[:alert] = "No tienes permiso para realizar esta acción."
-      redirect_back(fallback_location: root_path)
-    end
+  def user_not_authorized(exception)
+    flash[:alert] = "No tienes permiso para realizar esta acción."
+    redirect_back(fallback_location: root_path)
+  end
 end

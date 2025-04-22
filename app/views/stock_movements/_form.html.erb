@@ -1,0 +1,63 @@
+<%= form_with(model: stock_movement, class: "contents") do |form| %>
+  <% if stock_movement.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(stock_movement.errors.count, "error") %> prohibited this stock_movement from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% stock_movement.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :product_id %>
+    <%= form.collection_select :product_id, Product.all, :id, :name, {}, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": stock_movement.errors[:product_id].none?, "border-red-400 focus:outline-red-600": stock_movement.errors[:product_id].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <div class="flex items-center space-x-1" data-controller="popover" data-action="mouseenter->popover#debouncedShow mouseleave->popover#debouncedHide">
+      <%= form.label :warehouse_id, "Warehouse (optional)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= button_tag type: "button", class: "btn", aria: { describedby: "library-tooltip" }, data: { popover_target: "button" } do %>
+        <%= tabler_icon('help', size: '17', class: "text-primary mb-1") %>
+      <% end %>
+      <div popover="hint" id="library-tooltip" class="popover bg-black text-reversed text-xs pb-1 pi-2" data-popover-target="menu" role="tooltip">
+        Almacén de origen o destino, si es un movimiento de transferencia.
+      </div>
+    </div>
+    <%= form.collection_select :warehouse_id, Warehouse.all, :id, :name, { include_blank: "Select a warehouse" }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": stock_movement.errors[:warehouse_id].none?, "border-red-400 focus:outline-red-600": stock_movement.errors[:warehouse_id].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :quantity_change %>
+    <%= form.number_field :quantity_change, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": stock_movement.errors[:quantity_change].none?, "border-red-400 focus:outline-red-600": stock_movement.errors[:quantity_change].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :movement_date %>
+    <%= form.datetime_field :movement_date, value: Time.now, readonly: true, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": stock_movement.errors[:movement_date].none?, "border-red-400 focus:outline-red-600": stock_movement.errors[:movement_date].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :notes %>
+    <%= form.textarea :notes, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": stock_movement.errors[:notes].none?, "border-red-400 focus:outline-red-600": stock_movement.errors[:notes].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <div class="flex items-center space-x-1" data-controller="popover" data-action="mouseenter->popover#debouncedShow mouseleave->popover#debouncedHide">
+      <%= form.label :movement_type, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= button_tag type: "button", class: "btn", aria: { describedby: "library-tooltip" }, data: { popover_target: "button" } do %>
+        <%= tabler_icon('help', size: '17', class: "text-primary mb-1") %>
+      <% end %>
+      <div popover="hint" id="library-tooltip" class="popover bg-black text-reversed text-xs pb-1 pi-2" data-popover-target="menu" role="tooltip">
+        El tipo de movimiento indica si el producto se ha agregado, eliminado o transferido.
+      </div>
+    </div>
+    <%= form.select :movement_type, StockMovement.movement_types.keys.map { |type| [type.humanize, type] }, {}, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": stock_movement.errors[:movement_type].none?, "border-red-400 focus:outline-red-600": stock_movement.errors[:movement_type].any?}] %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

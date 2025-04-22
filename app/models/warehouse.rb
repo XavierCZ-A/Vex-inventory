@@ -4,6 +4,7 @@ class Warehouse < ApplicationRecord
   # Associations
   has_many :stocks
   has_many :products, through: :stocks
+  has_many :stock_movements, dependent: :destroy
   belongs_to :organization
 
   # Validators

@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   belongs_to :organization
   has_many :sent_invitations, class_name: "Invitation", foreign_key: "sender_id", dependent: :destroy
+  has_many :stock_movements
 
 
   validates :email_address, presence: true, uniqueness: true, format: {
@@ -28,6 +29,8 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
+  normalizes :name, with: ->(n) { n.strip.capitalize }
+  normalizes :last_name, with: ->(n) { n.strip.capitalize }
 
   scope :organization_users, -> { where(organization: Current.organization) }
   scope :employee, -> { where(role: :employee) }

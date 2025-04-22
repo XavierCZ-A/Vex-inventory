@@ -47,10 +47,10 @@ class SuppliersController < ApplicationController
   def purchase_orders
     @supplier = Supplier.find(params[:id])
     @orders = Order.where(supplier_id: @supplier.id)
-    @total_amount = @orders.total_amount_order
+
     respond_to do |format|
       format.html do
-        render partial: "suppliers/components/supplier_purchase_orders", locals: { supplier: @supplier, orders: @orders, total_amount: @total_amount }
+        render partial: "suppliers/components/supplier_purchase_orders", locals: { supplier: @supplier, orders: @orders }
       end
     end
   end

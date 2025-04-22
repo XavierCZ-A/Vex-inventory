@@ -13,45 +13,30 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/organizations", type: :request do
-  before do
-    login_user
-  end
-
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      name: "Test Organization",
+      users_attributes: [
+        {
+          name: "Test User",
+          last_name: "Test Last Name",
+          email_address: "test@example.com",
+          password: "password",
+          role: "admin"
+        }
+      ]
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      name: ""
+    }
   }
-
-  describe "GET /index" do
-    it "renders a successful response" do
-      Organization.create! valid_attributes
-      get organizations_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      organization = Organization.create! valid_attributes
-      get organization_url(organization)
-      expect(response).to be_successful
-    end
-  end
 
   describe "GET /new" do
     it "renders a successful response" do
       get new_organization_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /edit" do
-    it "renders a successful response" do
-      organization = Organization.create! valid_attributes
-      get edit_organization_url(organization)
       expect(response).to be_successful
     end
   end
@@ -66,7 +51,7 @@ RSpec.describe "/organizations", type: :request do
 
       it "redirects to the created organization" do
         post organizations_url, params: { organization: valid_attributes }
-        expect(response).to redirect_to(organization_url(Organization.last))
+        expect(response).to redirect_to(root_path)
       end
     end
 
@@ -81,51 +66,6 @@ RSpec.describe "/organizations", type: :request do
         post organizations_url, params: { organization: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    end
-  end
-
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested organization" do
-        organization = Organization.create! valid_attributes
-        patch organization_url(organization), params: { organization: new_attributes }
-        organization.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "redirects to the organization" do
-        organization = Organization.create! valid_attributes
-        patch organization_url(organization), params: { organization: new_attributes }
-        organization.reload
-        expect(response).to redirect_to(organization_url(organization))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        organization = Organization.create! valid_attributes
-        patch organization_url(organization), params: { organization: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-  end
-
-  describe "DELETE /destroy" do
-    it "destroys the requested organization" do
-      organization = Organization.create! valid_attributes
-      expect {
-        delete organization_url(organization)
-      }.to change(Organization, :count).by(-1)
-    end
-
-    it "redirects to the organizations list" do
-      organization = Organization.create! valid_attributes
-      delete organization_url(organization)
-      expect(response).to redirect_to(organizations_url)
     end
   end
 end
