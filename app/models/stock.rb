@@ -1,7 +1,9 @@
 class Stock < ApplicationRecord
   acts_as_tenant(:organization)
-  after_initialize :set_entry_date, if: :new_record?
 
+  after_initialize :set_entry_date, if: :new_record?
+  after_create :initial_stock_movement
+  after_update :adjustment_stock_movement
 
   # Associations
   belongs_to :product, optional: true
@@ -21,5 +23,32 @@ class Stock < ApplicationRecord
 
   def set_entry_date
     self.entry_date ||= Date.current
+  end
+
+  def initial_stock_movement
+    if self.quantity > 0
+      create_stock_movement(self.quantity, :initial)
+    end
+  end
+
+  def adjustment_stock_movement
+    if saved_change_to_quantity?
+      difference = self.quantity - self.quantity_before_last_save
+      if difference != 0
+        create_stock_movement(difference, :adjustment)
+      end
+    end
+  end
+
+  def create_stock_movement(qty_change, movement_type)
+    StockMovement.create!(
+      product: self.product,
+      warehouse: self.warehouse,
+      quantity_change: qty_change,
+      movement_date: Time.now,
+      organization: self.organization,
+      user: Current.user,
+      movement_type: movement_type
+    )
   end
 end

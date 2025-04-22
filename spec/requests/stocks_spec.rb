@@ -13,30 +13,45 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/stocks", type: :request do
+  let(:organization) { create(:organization) }
+  let(:user) { create(:user, organization: organization, password: 'password') }
+  let(:product) { create(:product, organization: organization) }
+  let(:warehouse) { create(:warehouse, organization: organization) }
+  let(:stock) { create(:stock, organization: organization, product: product, warehouse: warehouse) }
+
+
+  # --- ¡AÑADIR ESTO! ---
   before do
-    login_user
+    # Configura el stub para Current.user ANTES de cualquier ejemplo
+    allow(Current).to receive(:user).and_return(user)
+    # También autentica al usuario para las peticiones HTTP simuladas
+    sign_in(user)
   end
 
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      quantity: 10,
+      entry_date: Date.today,
+      organization_id: organization.id,
+      product_id: product.id,
+      warehouse_id: warehouse.id
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      quantity: nil,
+      entry_date: nil,
+      organization_id: nil,
+      product_id: nil,
+      warehouse_id: nil
+    }
   }
 
   describe "GET /index" do
     it "renders a successful response" do
       Stock.create! valid_attributes
       get stocks_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      stock = Stock.create! valid_attributes
-      get stock_url(stock)
       expect(response).to be_successful
     end
   end
@@ -66,7 +81,7 @@ RSpec.describe "/stocks", type: :request do
 
       it "redirects to the created stock" do
         post stocks_url, params: { stock: valid_attributes }
-        expect(response).to redirect_to(stock_url(Stock.last))
+        expect(response).to redirect_to(products_url)
       end
     end
 
@@ -87,21 +102,23 @@ RSpec.describe "/stocks", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          quantity: 20
+        }
       }
 
       it "updates the requested stock" do
         stock = Stock.create! valid_attributes
         patch stock_url(stock), params: { stock: new_attributes }
         stock.reload
-        skip("Add assertions for updated state")
+        expect(stock.quantity).to eq(20)
       end
 
       it "redirects to the stock" do
         stock = Stock.create! valid_attributes
         patch stock_url(stock), params: { stock: new_attributes }
         stock.reload
-        expect(response).to redirect_to(stock_url(stock))
+        expect(response).to redirect_to(products_url)
       end
     end
 

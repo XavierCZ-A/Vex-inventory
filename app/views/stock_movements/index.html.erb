@@ -1,0 +1,37 @@
+<% content_for :title, "Stock movements" %>
+
+<div class="w-full mx-auto p-3">
+  <%= render "stock_movements/components/navigation" %>
+  <hr class="w-full border-[#E5E7EB] mt-3 mb-5" />
+  <div id="purchase_orders" class="min-w-full">
+    <% if @stock_movements.any? %>
+      <section class="overflow-hidden p-2 rounded-lg border bg-white border-gray-200 shadow">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead>
+            <tr class="border-b border-[#E5E7EB]">
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">Date/Hour</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">Type</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">Product</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">Quantity</th>
+              <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">Warehouse</th>
+              <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">User</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <%= render @stock_movements %>
+          </tbody>
+        </table>
+      </section>
+    <% else %>
+      <%= render Shared::EmptyStateComponent.new(
+        title: "There are no suppliers",
+        description: "This provider has no stock movements added. Do you want to add one now?",
+        icon: "users-group",
+        icon_button: "plus",
+        path: new_stock_movement_path,
+        text: "Add stock movement",
+        turbo_frame: "modal"
+      ) %>
+    <% end %>
+  </div>
+</div>

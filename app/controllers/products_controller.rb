@@ -33,7 +33,6 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    @product.stocks.build
   end
 
   # POST /products or /products.json
@@ -66,11 +65,6 @@ class ProductsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params.expect(:id))
-    end
-
-    # Only allow a list of trusted parameters through.
-    def product_params
-      params.expect(product: [ :name, :description, :price, :category_id ])
     end
 
     def product_params

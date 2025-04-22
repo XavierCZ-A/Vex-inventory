@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_08_211248) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_20_231436) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -113,6 +113,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_08_211248) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "stock_movements", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "warehouse_id"
+    t.integer "quantity_change", null: false
+    t.datetime "movement_date", null: false
+    t.text "notes"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "organization_id", null: false
+    t.integer "movement_type"
+    t.index ["movement_date"], name: "index_stock_movements_on_movement_date"
+    t.index ["organization_id"], name: "index_stock_movements_on_organization_id"
+    t.index ["product_id"], name: "index_stock_movements_on_product_id"
+    t.index ["user_id"], name: "index_stock_movements_on_user_id"
+    t.index ["warehouse_id"], name: "index_stock_movements_on_warehouse_id"
+  end
+
   create_table "stocks", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "warehouse_id", null: false
@@ -173,6 +191,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_08_211248) do
   add_foreign_key "products", "categories"
   add_foreign_key "products", "organizations"
   add_foreign_key "sessions", "users"
+  add_foreign_key "stock_movements", "organizations"
+  add_foreign_key "stock_movements", "products"
+  add_foreign_key "stock_movements", "users"
+  add_foreign_key "stock_movements", "warehouses"
   add_foreign_key "stocks", "organizations"
   add_foreign_key "stocks", "products"
   add_foreign_key "stocks", "warehouses"

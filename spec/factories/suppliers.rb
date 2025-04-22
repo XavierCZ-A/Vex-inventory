@@ -3,7 +3,7 @@ FactoryBot.define do
     company_name { "MyString" }
     supplier_name { "MyString" }
     supplier_phone { "MyString" }
-    supplier_email { "email@example.com" }
+    sequence(:supplier_email) { |n| "user#{n}@example.com" }
     supplier_address { "MyString" }
     notes { "MyText" }
     organization

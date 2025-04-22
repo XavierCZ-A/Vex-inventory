@@ -6,13 +6,14 @@ class Product < ApplicationRecord
 
   # Associations
   belongs_to :category
+  has_many :stock_movements, dependent: :destroy
   has_many :stocks, dependent: :destroy
   has_many :warehouses, through: :stocks
   has_many :order_items, dependent: :destroy
   has_many :orders, through: :order_items
   belongs_to :organization
 
-  accepts_nested_attributes_for :stocks, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :stocks, allow_destroy: true, reject_if: proc { |attributes| attributes["quantity"].blank? }
 
   # Validators
   validates :sku, presence: true, uniqueness: { scope: :organization_id }

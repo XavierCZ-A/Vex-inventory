@@ -11,6 +11,7 @@ class InvitationsController < ApplicationController
 
   def create
     @invitation = Invitation.new(invitation_params)
+    authorize @invitation
     if @invitation.save
       InvitationsMailer.invite(@invitation).deliver_later
       redirect_to invitations_path, notice: "Invitation sent successfully."
@@ -28,6 +29,6 @@ class InvitationsController < ApplicationController
   private
 
   def invitation_params
-    params.expect(invitation: [ :email, :name ])
+    params.require(:invitation).permit(:email, :name)
   end
 end

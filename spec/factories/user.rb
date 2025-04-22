@@ -6,5 +6,6 @@ FactoryBot.define do
     email_address { "email@example.com" }
     password { 'SecretPassword' }
     organization
+    role { :admin }
   end
 end

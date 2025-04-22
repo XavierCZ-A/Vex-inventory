@@ -14,7 +14,7 @@
       </div>
       <ul class="space-y-2 p-3">
         <li>
-          <%= sidebar_link(text: "Products", path: products_path, icon_name: 'cube') %>
+          <%= sidebar_link(text: "Products", path: products_path, icon_name: 'package') %>
         </li>
         <li>
           <%= sidebar_link(text: "Warehouses", path: warehouses_path, icon_name: 'building-warehouse') %>
@@ -33,6 +33,9 @@
         </li>
         <li>
           <%= sidebar_link(text: "Employees", path: employees_path, icon_name: 'users-group') if Current.user.admin? %>
+        </li>
+        <li>
+          <%= sidebar_link(text: "Stock Movements", path: stock_movements_path, icon_name: 'arrow-down-from-arc') %>
         </li>
       </ul>
     </div>

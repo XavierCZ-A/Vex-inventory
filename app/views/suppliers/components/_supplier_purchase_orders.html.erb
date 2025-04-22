@@ -35,7 +35,7 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
               <% orders.each do |order_item| %>
-                <%= render "suppliers/components/data_purchase_order", order: order_item, total_amount: total_amount %>
+                <%= render "suppliers/components/data_purchase_order", order: order_item %>
               <% end %>
             </tbody>
           </table>

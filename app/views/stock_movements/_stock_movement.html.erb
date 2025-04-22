@@ -1,0 +1,27 @@
+<tr id="<%= dom_id stock_movement %>" class="bg-white hover:bg-gray-200">
+  <td class="px-6 py-4 whitespace-nowrap w-1/4">
+    <p class="text-sm font-medium text-gray-900"><%= stock_movement.movement_date.strftime("%d/%m/%Y %H:%M") %></p>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap w-1/4">
+    <span class="<%= stock_movement_color(stock_movement.movement_type) %> px-2 py-1 rounded-full text-xs">
+      <%= stock_movement.movement_type.humanize %>
+    </span>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap w-1/4">
+    <p class="text-sm font-medium text-gray-900"><%= stock_movement.product.name %></p>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap w-1/4">
+    <% if stock_movement.quantity_change < 0 %>
+      <p class="text-sm font-medium text-red-500"><%= stock_movement.quantity_change %></p>
+    <% else %>
+      <p class="text-sm font-medium text-green-900"><%= stock_movement.quantity_change %></p>
+    <% end %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap w-1/4">
+    <p class="text-sm font-medium text-gray-900"><%= stock_movement&.warehouse&.name %></p>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap w-1/4">
+    <p class="text-sm font-medium text-gray-900"><%= stock_movement.user.name %></p>
+  </td>
+</tr>
+

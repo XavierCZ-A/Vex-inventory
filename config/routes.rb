@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :stock_movements, only: [ :index, :new, :create ]
   resources :customers
   resources :orders do
     patch :update_status, on: :member
