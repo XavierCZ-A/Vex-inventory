@@ -18,7 +18,11 @@
     </td>
     <td class="px-6 py-4">
       <p class="text-sm font-medium text-gray-900">
-        <%= product.stocks.sum(:quantity) || "Sin stock" %>
+        <% if product.stocks.any? %>
+          <%= product.stocks.total_stock %>
+        <% else %>
+          <p class="text-red-500">Sin stock</p>
+        <% end %>
       </p>
     </td>
     
@@ -28,11 +32,13 @@
       </span>
     </td>
     <td class="px-6 py-4 flex space-x-2 justify-center">
-      <%= link_to edit_product_path(product), class: "text-gray-600 hover:text-gray-800 p-2", data: { turbo_frame: "modal" } do %>
+      <%= link_to edit_product_path(product), class: "button-secondary-icon", data: { turbo_frame: "modal" } do %>
         <%= tabler_icon('edit', size: '20', class: "mr-2") %>
+        edit
       <% end %>
-      <%= button_to product, method: :delete, class: 'text-gray-600 hover:text-gray-800 p-2', data: { turbo_confirm: 'Are you sure you want to delete this product?' } do %>
+      <%= button_to product, method: :delete, class: 'button-secondary-icon', data: { turbo_confirm: 'Are you sure you want to delete this product?' } do %>
         <%= tabler_icon('trash', size: '20', class: "mr-2") %>
+        delete
       <% end %>
     </td>
   </tr>

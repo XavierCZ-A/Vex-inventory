@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @pagy, @products = pagy(Product.includes(:category).order(created_at: :desc))
+    @pagy, @products = pagy(Product.includes(:category, :stocks).order(created_at: :desc))
     @count_products = Product.count
     @total_products_price = Product.total_products_price
     @total_stock = Stock.total_stock
@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1 or /products/1.json
   def update
     if @product.update(product_params)
-      redirect_to @product, notice: "Product was successfully updated."
+      redirect_to products_path, notice: "Product was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end

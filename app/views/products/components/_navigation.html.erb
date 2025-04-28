@@ -1,4 +1,4 @@
-<nav class="flex items-center mb-6">
+<nav class="flex items-center mb-4">
   <h1 class="text-2xl font-extrabold text-gray-800">
     Products
     <span class="block text-sm font-medium text-gray-500 mt-1">
@@ -16,6 +16,13 @@
     <%= render Ui::ButtonComponent.new(
       path: new_product_path,
       text: "Add product",
+      icon: "plus",
+      turbo_frame: "modal",
+      variant: :primary
+    ) %>
+    <%= render Ui::ButtonComponent.new(
+      path: new_stock_path,
+      text: "Add stock",
       icon: "plus",
       turbo_frame: "modal",
       variant: :primary

@@ -1,29 +1,24 @@
 class Stock < ApplicationRecord
   acts_as_tenant(:organization)
 
-  after_initialize :set_entry_date, if: :new_record?
   after_create :initial_stock_movement
   after_update :adjustment_stock_movement
 
   # Associations
   belongs_to :product, optional: true
-  belongs_to :warehouse
+  belongs_to :warehouse, optional: true
   belongs_to :organization
 
   # Validators
   validates :quantity, presence: true, numericality: { greater_than: 0 }
-  validates :entry_date, presence: true
   validates :warehouse_id, presence: true
+  validates :product_id, presence: true
 
 
   # Scopes
   scope :total_stock, -> { sum(:quantity) }
 
   private
-
-  def set_entry_date
-    self.entry_date ||= Date.current
-  end
 
   def initial_stock_movement
     if self.quantity > 0

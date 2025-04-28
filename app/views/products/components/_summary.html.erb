@@ -19,11 +19,4 @@
     color: "green",
     formatter: :currency
   ) %>
-  
-  <% dashboard.with_card(
-    title: "Agotados",
-    value: @products.count_with_zero_stock,
-    icon: "box",
-    color: "red"
-  ) %>
 <% end %>
