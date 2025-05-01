@@ -13,15 +13,18 @@ Rails.application.routes.draw do
   end
   resources :stocks, except: :show
   resources :warehouses do
-    get "stock", on: :member, to: "stocks#index"
+    resources :stocks, only: :index
   end
   resources :categories, only: [ :index, :new, :create ]
   resources :products
   resources :invitations, only: [ :index, :new, :create ] do
     post :resend, on: :member
   end
+  resources :employees, only: [ :index ] do
+    patch :desactivate, on: :member
+    patch :activate, on: :member
+  end
   resources :homes, only: :index
-  resources :employees, only: [ :index ]
   get "home", to: "homes#index"
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?

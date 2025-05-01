@@ -34,4 +34,7 @@
       ) %>
     <% end %>
   </div>
+  <% if @count_stock_movements > 5 %>
+    <%== pagy_nav(@pagy) %>
+  <% end %>
 </div>

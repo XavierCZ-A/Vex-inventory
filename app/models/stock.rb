@@ -5,15 +5,14 @@ class Stock < ApplicationRecord
   after_update :adjustment_stock_movement
 
   # Associations
-  belongs_to :product, optional: true
-  belongs_to :warehouse, optional: true
+  belongs_to :product, inverse_of: :stocks
+  belongs_to :warehouse
   belongs_to :organization
 
   # Validators
   validates :quantity, presence: true, numericality: { greater_than: 0 }
   validates :warehouse_id, presence: true
-  validates :product_id, presence: true
-
+  validates :product, presence: true
 
   # Scopes
   scope :total_stock, -> { sum(:quantity) }

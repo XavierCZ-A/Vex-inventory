@@ -1,10 +1,10 @@
 class StocksController < ApplicationController
   before_action :set_stock, only: %i[ show edit update destroy ]
+  before_action :set_warehouse, only: %i[ index ]
 
   # GET /stocks or /stocks.json
   def index
-    if params[:id]
-      @warehouse = Warehouse.find(params[:id])
+    if @warehouse
       @stocks = @warehouse.stocks.includes(product: :category)
     else
       @stocks = Stock.includes(product: :category)
@@ -46,6 +46,11 @@ class StocksController < ApplicationController
   end
 
   private
+
+  def set_warehouse
+    @warehouse = Warehouse.find(params[:warehouse_id])
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_stock
       @stock = Stock.find(params.expect(:id))

@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
-
   acts_as_tenant(:organization)
+
+  before_create :set_is_activate
 
   enum :role, {
     admin: 0,
@@ -26,7 +27,7 @@ class User < ApplicationRecord
     with: /\A[a-zA-Z\s]+\z/,
     message: :invalid
   }
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, if: :password_digest_changed?
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   normalizes :name, with: ->(n) { n.strip.capitalize }
@@ -38,5 +39,11 @@ class User < ApplicationRecord
   def full_name
     full_names = "#{name} #{last_name}"
     full_names.capitalize
+  end
+
+  private
+
+  def set_is_activate
+    self.is_activate = true
   end
 end

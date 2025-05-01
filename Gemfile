@@ -54,7 +54,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "rspec-rails", "~> 7.0.0"
   gem "rails-controller-testing", "~> 1.0", ">= 1.0.5"
-  gem 'pundit-matchers', '~> 4.0'
+  gem "pundit-matchers", "~> 4.0"
   gem "shoulda-matchers", require: false
 end
 
@@ -81,5 +81,5 @@ gem "letter_opener", group: :development
 gem "letter_opener_web", group: :development
 
 gem "pundit", "~> 2.5"
-gem 'pg_search'
+gem "pg_search"
 

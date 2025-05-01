@@ -1,7 +1,8 @@
 class StockMovementsController < ApplicationController
   # GET /stock_movements or /stock_movements.json
   def index
-    @stock_movements = StockMovement.includes(:product, :warehouse, :user).order(created_at: :desc)
+    @pagy, @stock_movements = pagy(StockMovement.includes(:product, :warehouse, :user).order(created_at: :desc))
+    @count_stock_movements = StockMovement.count
   end
 
   # GET /stock_movements/new
