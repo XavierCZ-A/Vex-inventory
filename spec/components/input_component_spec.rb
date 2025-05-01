@@ -2,14 +2,10 @@
 
 require "rails_helper"
 
-RSpec.describe InputComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Ui::InputComponent, type: :component do
+  it "renders an input field" do
+    render_inline(described_class.new(form: form, attribute: :name, icon: "user", placeholder: "Enter your name"))
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+    expect(page).to have_css("input[type='text']")
+  end
 end

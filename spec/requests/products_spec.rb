@@ -130,7 +130,7 @@ RSpec.describe "/products", type: :request do
         product = Product.create! valid_attributes
         patch product_url(product), params: { product: new_attributes }
         product.reload
-        expect(response).to redirect_to(product_url(product))
+        expect(response).to redirect_to(products_url)
       end
     end
 

@@ -19,8 +19,6 @@ RSpec.describe "/stocks", type: :request do
   let(:warehouse) { create(:warehouse, organization: organization) }
   let(:stock) { create(:stock, organization: organization, product: product, warehouse: warehouse) }
 
-
-  # --- ¡AÑADIR ESTO! ---
   before do
     # Configura el stub para Current.user ANTES de cualquier ejemplo
     allow(Current).to receive(:user).and_return(user)
@@ -31,7 +29,6 @@ RSpec.describe "/stocks", type: :request do
   let(:valid_attributes) {
     {
       quantity: 10,
-      entry_date: Date.today,
       organization_id: organization.id,
       product_id: product.id,
       warehouse_id: warehouse.id
@@ -41,7 +38,6 @@ RSpec.describe "/stocks", type: :request do
   let(:invalid_attributes) {
     {
       quantity: nil,
-      entry_date: nil,
       organization_id: nil,
       product_id: nil,
       warehouse_id: nil

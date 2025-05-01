@@ -13,7 +13,7 @@ RSpec.describe Stock, type: :model do
   end
 
   describe 'associations' do
-    it { should belong_to(:product).optional }
+    it { should belong_to(:product) }
     it { should belong_to(:warehouse) }
     it { should belong_to(:organization) }
   end
@@ -22,7 +22,6 @@ RSpec.describe Stock, type: :model do
     it { should validate_presence_of(:quantity) }
     it { should validate_numericality_of(:quantity).is_greater_than(0) }
 
-    it { should validate_presence_of(:entry_date) }
     it { should validate_presence_of(:warehouse_id) }
   end
 

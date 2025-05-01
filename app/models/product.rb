@@ -13,7 +13,7 @@ class Product < ApplicationRecord
   has_many :orders, through: :order_items
   belongs_to :organization
 
-  accepts_nested_attributes_for :stocks, allow_destroy: true
+  accepts_nested_attributes_for :stocks, allow_destroy: true, reject_if: :all_blank
 
   # Validators
   validates :sku, presence: true, uniqueness: { scope: :organization_id }

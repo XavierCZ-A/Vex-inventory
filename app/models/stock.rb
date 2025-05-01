@@ -21,7 +21,8 @@ class Stock < ApplicationRecord
 
   def initial_stock_movement
     if self.quantity > 0
-      create_stock_movement(self.quantity, :initial)
+      movement_type = initial_movement_type
+      create_stock_movement(self.quantity, movement_type)
     end
   end
 
@@ -34,12 +35,23 @@ class Stock < ApplicationRecord
     end
   end
 
+  def initial_movement_type
+    has_previous_movements = StockMovement.where(
+        organization_id: self.organization_id,
+        product_id: self.product_id,
+        warehouse_id: self.warehouse_id
+    ).exists?
+
+    has_previous_movements ? :adjustment : :initial
+  end
+
+
   def create_stock_movement(qty_change, movement_type)
     StockMovement.create!(
       product: self.product,
       warehouse: self.warehouse,
       quantity_change: qty_change,
-      movement_date: Time.now,
+      movement_date: Time.current,
       organization: self.organization,
       user: Current.user,
       movement_type: movement_type

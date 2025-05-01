@@ -1,6 +1,6 @@
 class StocksController < ApplicationController
   before_action :set_stock, only: %i[ show edit update destroy ]
-  before_action :set_warehouse, only: %i[ index ]
+  before_action :set_warehouse, only: %i[ index ], if: -> { params[:warehouse_id].present? }
 
   # GET /stocks or /stocks.json
   def index
