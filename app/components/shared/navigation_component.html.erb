@@ -1,0 +1,15 @@
+<nav class="flex items-center mb-4">
+    <h1 class="text-2xl font-extrabold text-gray-800">
+      <%= title %>
+      <span class="block text-sm font-medium text-gray-500 mt-1">
+        <%= subtitle %>
+       </span>
+    </h1>
+  <% if buttons.any? %>
+    <div class="flex items-center space-x-2 ml-auto">
+      <% buttons.each do |button| %>
+        <%= button %>
+      <% end %>
+    </div>
+  <% end %>
+</nav>

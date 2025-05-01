@@ -1,6 +1,13 @@
 <% content_for :title, "Employee" %>
 <div class="w-full mx-auto p-3">
-  <%= render "employees/components/navigation" %>
+  <%= render Shared::NavigationComponent.new(title: "Employees", subtitle: "Manage the permissions of each employee") do |nav| %>
+    <% nav.with_button(
+      path: new_invitation_path,
+      text: "Invite employee",
+      icon: "plus",
+      turbo_frame: "modal"
+    ) %>
+  <% end %>
   <hr class="w-full border-[#E5E7EB] mt-3 mb-5" />
   <% if @users.any? %>
     <div id="orders" class="overflow-hidden p-2 rounded-lg bg-white border border-gray-200 shadow">

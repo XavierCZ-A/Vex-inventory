@@ -1,6 +1,13 @@
 <% content_for :title, "Orders" %>
 <div class="w-full mx-auto p-3">
-  <%= render "orders/components/navigation" %>
+  <%= render Shared::NavigationComponent.new(title: "Orders", subtitle: "Manage your orders") do |nav| %>
+    <% nav.with_button(
+      path: new_order_path,
+      text: "Add order",
+      icon: "plus",
+      turbo_frame: "modal"
+    ) %>
+  <% end %>
   <hr class="w-full border-[#E5E7EB] mt-3 mb-5" />
   <%= render "orders/components/summary" %>
   <% if @orders.any? %>

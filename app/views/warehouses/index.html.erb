@@ -1,22 +1,14 @@
 <% content_for :title, "Warehouses" %>
 
 <div class="w-full h-full overflow-hidden p-3 overflow-y-auto scrollbar-hide">
-  <div class="flex justify-between items-center mb-3">
-    <h1 class="text-2xl font-extrabold text-gray-800">
-      Warehouses
-      <span class="block text-sm font-medium text-gray-500 mt-1">
-        Manage your warehouses and distribution centers
-      </span>
-    </h1>
-    <% if @warehouses.any? %>
-      <%= render Ui::ButtonComponent.new(
-        path: new_warehouse_path,
-        text: "Add warehouse",
-        icon: "plus",
-        turbo_frame: "modal"
-      ) %>
-    <% end %>
-  </div>
+  <%= render Shared::NavigationComponent.new(title: "Warehouses", subtitle: "Manage your warehouses and distribution centers") do |nav| %>
+    <% nav.with_button(
+      path: new_warehouse_path,
+      text: "Add warehouse",
+      icon: "plus",
+      turbo_frame: "modal"
+    ) %>
+  <% end %>
   <hr class="w-full border-[#E5E7EB] mt-3 mb-3" />
   <%= render "warehouses/components/summary" %>
   <div id="warehouses" class="flex flex-wrap gap-4">

@@ -1,7 +1,14 @@
 <% content_for :title, "Invitations" %>
 
 <div class="w-full mx-auto p-3">
-  <%= render "invitations/components/navigation" %>
+  <%= render Shared::NavigationComponent.new(title: "Invitations", subtitle: "Manage your team's access to the platform  ") do |nav| %>
+    <% nav.with_button(
+      path: new_invitation_path,
+      text: "Add invitation",
+      icon: "plus",
+      turbo_frame: "modal"
+    ) %>
+  <% end %>
   <hr class="w-full border-[#E5E7EB] mt-3 mb-5" />
   <div id="purchase_orders" class="min-w-full">
     <% if @invitations.any? %>
