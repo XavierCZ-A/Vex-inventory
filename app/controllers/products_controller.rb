@@ -1,3 +1,5 @@
+require "csv"
+
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
 
@@ -60,6 +62,24 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy!
     redirect_to products_path, status: :see_other, notice: "Product was successfully destroyed."
+  end
+
+  def import
+    file = params[:csv_file]
+    redirect_to products_path, alert: "Solo se aceptan archivos CSV" unless file.content_type == "text/csv"
+    file = File.open(file)
+    csv = CSV.parse(file, headers: true, col_sep: ",")
+    product_hash = {}
+    csv.each do |row|
+      product_hash[:name] = row["name"]
+      product_hash[:description] = row["description"]
+      product_hash[:price] = row["price"]
+      product_hash[:category_id] = row["category_id"]
+      product_hash[:sku] = row["sku"]
+      product_hash[:organization_id] = Current.organization.id
+      Product.create(product_hash)
+    end
+    redirect_to products_path, notice: "Productos importados correctamente"
   end
 
   private

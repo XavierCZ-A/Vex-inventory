@@ -1,0 +1,16 @@
+<%= form_with url: url, method: :post, data: { controller: stimulus_controller } do |form| %>
+  <div class="flex items-center space-x-2">
+    <label class="flex items-center text-black shadow-lg rounded-lg p-2 cursor-pointer hover:bg-gray-100">
+      <%= helpers.tabler_icon(icon, size: '20', class: "mr-2") %>
+      <%= label_text %>
+
+      <%= form.file_field input_name, accept: accept_types, class: "hidden", data: input_data_attributes %>
+    </label>
+
+    <%= form.button class: "flex items-center text-white bg-primary hover:bg-hover rounded-lg p-2 hidden", data: submit_data_attributes do %>
+      <%= helpers.tabler_icon(icon, size: '20', class: "mr-2") %>
+      <span><%= submit_text %></span>
+    <% end %>
+  </div>
+<% end %>
+

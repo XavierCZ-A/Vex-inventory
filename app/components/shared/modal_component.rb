@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-class Shared::NavigationComponent < ViewComponent::Base
-  renders_many :buttons, Ui::ButtonComponent
-  renders_one :file_upload, FileUploadComponent
-
+class Shared::ModalComponent < ViewComponent::Base
   attr_reader :title, :subtitle
 
   def initialize(title:, subtitle:)

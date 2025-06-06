@@ -16,7 +16,11 @@ Rails.application.routes.draw do
     resources :stocks, only: :index
   end
   resources :categories, only: [ :index, :new, :create ]
-  resources :products
+  resources :products do
+    collection do
+      post :import
+    end
+  end
   resources :invitations, only: [ :index, :new, :create ] do
     post :resend, on: :member
   end
